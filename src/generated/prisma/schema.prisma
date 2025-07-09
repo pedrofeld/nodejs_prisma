@@ -15,42 +15,42 @@ datasource db {
 }
 
 model Aluno {
-  id String @id @default(uuid())
-  nome String @db.VarChar(120)
-  email String @unique @db.VarChar(60)
-  dataNascimento DateTime? @db.Date @map("aniversario") // ? indica campo opcional, @ indica o nome no banco
-  formado Boolean @default(false)
-  rg Int?
+  id             String    @id @default(uuid())
+  nome           String    @db.VarChar(120)
+  email          String    @unique @db.VarChar(60)
+  dataNascimento DateTime? @map("aniversario") @db.Date // ? indica campo opcional, @ indica o nome no banco
+  formado        Boolean   @default(false)
+  rg             Int?
 
   // função de auditoria, para histórico de criação e atualização
-  dataCriacao DateTime @default(now()) @map("data_criacao") // @default(now()) define o valor padrão como a data atual
+  dataCriacao     DateTime @default(now()) @map("data_criacao") // @default(now()) define o valor padrão como a data atual
   dataAtualizacao DateTime @updatedAt @map("data_atualizacao") // @updatedAt atualiza automaticamente
 
   @@map("aluno") // 2x @ indica o nome da tabela no banco de dados
 }
 
 model Curso {
-  id String @id @default(uuid())
-  titulo String
-  ementa String
+  id           String  @id @default(uuid())
+  titulo       String
+  ementa       String
   cargaHoraria Decimal
-  maxAlunos Int @default(30) @db.SmallInt
-  status String
+  maxAlunos    Int     @default(30) @db.SmallInt
+  status       String
 
-  dataCriacao DateTime @default(now()) @map("data_criacao")
+  dataCriacao     DateTime @default(now()) @map("data_criacao")
   dataAtualizacao DateTime @updatedAt @map("data_atualizacao")
 
   @@map("curso")
 }
 
 model Material {
-  id Int @id @default(autoincrement())
-  titulo String
-  descricao String
-  link String
+  id         Int     @id @default(autoincrement())
+  titulo     String
+  descricao  String
+  link       String
   disponivel Boolean
 
-  dataCriacao DateTime @default(now()) @map("data_criacao")
+  dataCriacao     DateTime @default(now()) @map("data_criacao")
   dataAtualizacao DateTime @updatedAt @map("data_atualizacao")
 
   @@map("material")
