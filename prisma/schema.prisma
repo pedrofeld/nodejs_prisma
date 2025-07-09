@@ -13,3 +13,28 @@ datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
 }
+
+model Aluno {
+  id String @id
+  nome String
+  email String
+  dataNascimento DateTime
+  formado Boolean
+}
+
+model Curso {
+  id String @id
+  titulo String
+  ementa String
+  cargaHoraria Decimal
+  naxAlunos Int
+  status String
+}
+
+model Material {
+  id Int @id
+  titulo String
+  descricao String
+  link String
+  disponivel Boolean
+}
