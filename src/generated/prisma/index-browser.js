@@ -159,6 +159,12 @@ exports.Prisma.CursoScalarFieldEnum = {
   dataAtualizacao: 'dataAtualizacao'
 };
 
+exports.Prisma.MatriculaScalarFieldEnum = {
+  idAluno: 'idAluno',
+  idCurso: 'idCurso',
+  dtMatricula: 'dtMatricula'
+};
+
 exports.Prisma.MaterialScalarFieldEnum = {
   id: 'id',
   titulo: 'titulo',
@@ -190,6 +196,7 @@ exports.Prisma.ModelName = {
   Endereco: 'Endereco',
   Avaliacao: 'Avaliacao',
   Curso: 'Curso',
+  Matricula: 'Matricula',
   Material: 'Material'
 };
 

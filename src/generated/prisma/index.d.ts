@@ -34,6 +34,11 @@ export type Avaliacao = $Result.DefaultSelection<Prisma.$AvaliacaoPayload>
  */
 export type Curso = $Result.DefaultSelection<Prisma.$CursoPayload>
 /**
+ * Model Matricula
+ * 
+ */
+export type Matricula = $Result.DefaultSelection<Prisma.$MatriculaPayload>
+/**
  * Model Material
  * 
  */
@@ -203,6 +208,16 @@ export class PrismaClient<
     * ```
     */
   get curso(): Prisma.CursoDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.matricula`: Exposes CRUD operations for the **Matricula** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more Matriculas
+    * const matriculas = await prisma.matricula.findMany()
+    * ```
+    */
+  get matricula(): Prisma.MatriculaDelegate<ExtArgs, ClientOptions>;
 
   /**
    * `prisma.material`: Exposes CRUD operations for the **Material** model.
@@ -657,6 +672,7 @@ export namespace Prisma {
     Endereco: 'Endereco',
     Avaliacao: 'Avaliacao',
     Curso: 'Curso',
+    Matricula: 'Matricula',
     Material: 'Material'
   };
 
@@ -676,7 +692,7 @@ export namespace Prisma {
       omit: GlobalOmitOptions
     }
     meta: {
-      modelProps: "aluno" | "endereco" | "avaliacao" | "curso" | "material"
+      modelProps: "aluno" | "endereco" | "avaliacao" | "curso" | "matricula" | "material"
       txIsolationLevel: Prisma.TransactionIsolationLevel
     }
     model: {
@@ -976,6 +992,80 @@ export namespace Prisma {
           }
         }
       }
+      Matricula: {
+        payload: Prisma.$MatriculaPayload<ExtArgs>
+        fields: Prisma.MatriculaFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.MatriculaFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$MatriculaPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.MatriculaFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$MatriculaPayload>
+          }
+          findFirst: {
+            args: Prisma.MatriculaFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$MatriculaPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.MatriculaFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$MatriculaPayload>
+          }
+          findMany: {
+            args: Prisma.MatriculaFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$MatriculaPayload>[]
+          }
+          create: {
+            args: Prisma.MatriculaCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$MatriculaPayload>
+          }
+          createMany: {
+            args: Prisma.MatriculaCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.MatriculaCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$MatriculaPayload>[]
+          }
+          delete: {
+            args: Prisma.MatriculaDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$MatriculaPayload>
+          }
+          update: {
+            args: Prisma.MatriculaUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$MatriculaPayload>
+          }
+          deleteMany: {
+            args: Prisma.MatriculaDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.MatriculaUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.MatriculaUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$MatriculaPayload>[]
+          }
+          upsert: {
+            args: Prisma.MatriculaUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$MatriculaPayload>
+          }
+          aggregate: {
+            args: Prisma.MatriculaAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateMatricula>
+          }
+          groupBy: {
+            args: Prisma.MatriculaGroupByArgs<ExtArgs>
+            result: $Utils.Optional<MatriculaGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.MatriculaCountArgs<ExtArgs>
+            result: $Utils.Optional<MatriculaCountAggregateOutputType> | number
+          }
+        }
+      }
       Material: {
         payload: Prisma.$MaterialPayload<ExtArgs>
         fields: Prisma.MaterialFieldRefs
@@ -1138,6 +1228,7 @@ export namespace Prisma {
     endereco?: EnderecoOmit
     avaliacao?: AvaliacaoOmit
     curso?: CursoOmit
+    matricula?: MatriculaOmit
     material?: MaterialOmit
   }
 
@@ -1234,10 +1325,12 @@ export namespace Prisma {
 
   export type AlunoCountOutputType = {
     avaliacoes: number
+    matriculas: number
   }
 
   export type AlunoCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     avaliacoes?: boolean | AlunoCountOutputTypeCountAvaliacoesArgs
+    matriculas?: boolean | AlunoCountOutputTypeCountMatriculasArgs
   }
 
   // Custom InputTypes
@@ -1256,6 +1349,44 @@ export namespace Prisma {
    */
   export type AlunoCountOutputTypeCountAvaliacoesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: AvaliacaoWhereInput
+  }
+
+  /**
+   * AlunoCountOutputType without action
+   */
+  export type AlunoCountOutputTypeCountMatriculasArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: MatriculaWhereInput
+  }
+
+
+  /**
+   * Count Type CursoCountOutputType
+   */
+
+  export type CursoCountOutputType = {
+    matriculas: number
+  }
+
+  export type CursoCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    matriculas?: boolean | CursoCountOutputTypeCountMatriculasArgs
+  }
+
+  // Custom InputTypes
+  /**
+   * CursoCountOutputType without action
+   */
+  export type CursoCountOutputTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the CursoCountOutputType
+     */
+    select?: CursoCountOutputTypeSelect<ExtArgs> | null
+  }
+
+  /**
+   * CursoCountOutputType without action
+   */
+  export type CursoCountOutputTypeCountMatriculasArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: MatriculaWhereInput
   }
 
 
@@ -1487,6 +1618,7 @@ export namespace Prisma {
     dataAtualizacao?: boolean
     endereco?: boolean | Aluno$enderecoArgs<ExtArgs>
     avaliacoes?: boolean | Aluno$avaliacoesArgs<ExtArgs>
+    matriculas?: boolean | Aluno$matriculasArgs<ExtArgs>
     _count?: boolean | AlunoCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["aluno"]>
 
@@ -1527,6 +1659,7 @@ export namespace Prisma {
   export type AlunoInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     endereco?: boolean | Aluno$enderecoArgs<ExtArgs>
     avaliacoes?: boolean | Aluno$avaliacoesArgs<ExtArgs>
+    matriculas?: boolean | Aluno$matriculasArgs<ExtArgs>
     _count?: boolean | AlunoCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type AlunoIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
@@ -1537,6 +1670,7 @@ export namespace Prisma {
     objects: {
       endereco: Prisma.$EnderecoPayload<ExtArgs> | null
       avaliacoes: Prisma.$AvaliacaoPayload<ExtArgs>[]
+      matriculas: Prisma.$MatriculaPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
@@ -1943,6 +2077,7 @@ export namespace Prisma {
     readonly [Symbol.toStringTag]: "PrismaPromise"
     endereco<T extends Aluno$enderecoArgs<ExtArgs> = {}>(args?: Subset<T, Aluno$enderecoArgs<ExtArgs>>): Prisma__EnderecoClient<$Result.GetResult<Prisma.$EnderecoPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
     avaliacoes<T extends Aluno$avaliacoesArgs<ExtArgs> = {}>(args?: Subset<T, Aluno$avaliacoesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$AvaliacaoPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    matriculas<T extends Aluno$matriculasArgs<ExtArgs> = {}>(args?: Subset<T, Aluno$matriculasArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$MatriculaPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -2408,6 +2543,30 @@ export namespace Prisma {
     take?: number
     skip?: number
     distinct?: AvaliacaoScalarFieldEnum | AvaliacaoScalarFieldEnum[]
+  }
+
+  /**
+   * Aluno.matriculas
+   */
+  export type Aluno$matriculasArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Matricula
+     */
+    select?: MatriculaSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Matricula
+     */
+    omit?: MatriculaOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MatriculaInclude<ExtArgs> | null
+    where?: MatriculaWhereInput
+    orderBy?: MatriculaOrderByWithRelationInput | MatriculaOrderByWithRelationInput[]
+    cursor?: MatriculaWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: MatriculaScalarFieldEnum | MatriculaScalarFieldEnum[]
   }
 
   /**
@@ -4852,6 +5011,8 @@ export namespace Prisma {
     status?: boolean
     dataCriacao?: boolean
     dataAtualizacao?: boolean
+    matriculas?: boolean | Curso$matriculasArgs<ExtArgs>
+    _count?: boolean | CursoCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["curso"]>
 
   export type CursoSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
@@ -4888,10 +5049,18 @@ export namespace Prisma {
   }
 
   export type CursoOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "titulo" | "ementa" | "cargaHoraria" | "maxAlunos" | "status" | "dataCriacao" | "dataAtualizacao", ExtArgs["result"]["curso"]>
+  export type CursoInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    matriculas?: boolean | Curso$matriculasArgs<ExtArgs>
+    _count?: boolean | CursoCountOutputTypeDefaultArgs<ExtArgs>
+  }
+  export type CursoIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
+  export type CursoIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
 
   export type $CursoPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "Curso"
-    objects: {}
+    objects: {
+      matriculas: Prisma.$MatriculaPayload<ExtArgs>[]
+    }
     scalars: $Extensions.GetPayloadResult<{
       id: string
       titulo: string
@@ -5295,6 +5464,7 @@ export namespace Prisma {
    */
   export interface Prisma__CursoClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
+    matriculas<T extends Curso$matriculasArgs<ExtArgs> = {}>(args?: Subset<T, Curso$matriculasArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$MatriculaPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -5349,6 +5519,10 @@ export namespace Prisma {
      */
     omit?: CursoOmit<ExtArgs> | null
     /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CursoInclude<ExtArgs> | null
+    /**
      * Filter, which Curso to fetch.
      */
     where: CursoWhereUniqueInput
@@ -5367,6 +5541,10 @@ export namespace Prisma {
      */
     omit?: CursoOmit<ExtArgs> | null
     /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CursoInclude<ExtArgs> | null
+    /**
      * Filter, which Curso to fetch.
      */
     where: CursoWhereUniqueInput
@@ -5384,6 +5562,10 @@ export namespace Prisma {
      * Omit specific fields from the Curso
      */
     omit?: CursoOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CursoInclude<ExtArgs> | null
     /**
      * Filter, which Curso to fetch.
      */
@@ -5433,6 +5615,10 @@ export namespace Prisma {
      */
     omit?: CursoOmit<ExtArgs> | null
     /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CursoInclude<ExtArgs> | null
+    /**
      * Filter, which Curso to fetch.
      */
     where?: CursoWhereInput
@@ -5481,6 +5667,10 @@ export namespace Prisma {
      */
     omit?: CursoOmit<ExtArgs> | null
     /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CursoInclude<ExtArgs> | null
+    /**
      * Filter, which Cursos to fetch.
      */
     where?: CursoWhereInput
@@ -5523,6 +5713,10 @@ export namespace Prisma {
      * Omit specific fields from the Curso
      */
     omit?: CursoOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CursoInclude<ExtArgs> | null
     /**
      * The data needed to create a Curso.
      */
@@ -5571,6 +5765,10 @@ export namespace Prisma {
      * Omit specific fields from the Curso
      */
     omit?: CursoOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CursoInclude<ExtArgs> | null
     /**
      * The data needed to update a Curso.
      */
@@ -5638,6 +5836,10 @@ export namespace Prisma {
      */
     omit?: CursoOmit<ExtArgs> | null
     /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CursoInclude<ExtArgs> | null
+    /**
      * The filter to search for the Curso to update in case it exists.
      */
     where: CursoWhereUniqueInput
@@ -5664,6 +5866,10 @@ export namespace Prisma {
      */
     omit?: CursoOmit<ExtArgs> | null
     /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CursoInclude<ExtArgs> | null
+    /**
      * Filter which Curso to delete.
      */
     where: CursoWhereUniqueInput
@@ -5684,6 +5890,30 @@ export namespace Prisma {
   }
 
   /**
+   * Curso.matriculas
+   */
+  export type Curso$matriculasArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Matricula
+     */
+    select?: MatriculaSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Matricula
+     */
+    omit?: MatriculaOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MatriculaInclude<ExtArgs> | null
+    where?: MatriculaWhereInput
+    orderBy?: MatriculaOrderByWithRelationInput | MatriculaOrderByWithRelationInput[]
+    cursor?: MatriculaWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: MatriculaScalarFieldEnum | MatriculaScalarFieldEnum[]
+  }
+
+  /**
    * Curso without action
    */
   export type CursoDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -5695,6 +5925,1050 @@ export namespace Prisma {
      * Omit specific fields from the Curso
      */
     omit?: CursoOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CursoInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model Matricula
+   */
+
+  export type AggregateMatricula = {
+    _count: MatriculaCountAggregateOutputType | null
+    _min: MatriculaMinAggregateOutputType | null
+    _max: MatriculaMaxAggregateOutputType | null
+  }
+
+  export type MatriculaMinAggregateOutputType = {
+    idAluno: string | null
+    idCurso: string | null
+    dtMatricula: Date | null
+  }
+
+  export type MatriculaMaxAggregateOutputType = {
+    idAluno: string | null
+    idCurso: string | null
+    dtMatricula: Date | null
+  }
+
+  export type MatriculaCountAggregateOutputType = {
+    idAluno: number
+    idCurso: number
+    dtMatricula: number
+    _all: number
+  }
+
+
+  export type MatriculaMinAggregateInputType = {
+    idAluno?: true
+    idCurso?: true
+    dtMatricula?: true
+  }
+
+  export type MatriculaMaxAggregateInputType = {
+    idAluno?: true
+    idCurso?: true
+    dtMatricula?: true
+  }
+
+  export type MatriculaCountAggregateInputType = {
+    idAluno?: true
+    idCurso?: true
+    dtMatricula?: true
+    _all?: true
+  }
+
+  export type MatriculaAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which Matricula to aggregate.
+     */
+    where?: MatriculaWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Matriculas to fetch.
+     */
+    orderBy?: MatriculaOrderByWithRelationInput | MatriculaOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: MatriculaWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Matriculas from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Matriculas.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned Matriculas
+    **/
+    _count?: true | MatriculaCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: MatriculaMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: MatriculaMaxAggregateInputType
+  }
+
+  export type GetMatriculaAggregateType<T extends MatriculaAggregateArgs> = {
+        [P in keyof T & keyof AggregateMatricula]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateMatricula[P]>
+      : GetScalarType<T[P], AggregateMatricula[P]>
+  }
+
+
+
+
+  export type MatriculaGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: MatriculaWhereInput
+    orderBy?: MatriculaOrderByWithAggregationInput | MatriculaOrderByWithAggregationInput[]
+    by: MatriculaScalarFieldEnum[] | MatriculaScalarFieldEnum
+    having?: MatriculaScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: MatriculaCountAggregateInputType | true
+    _min?: MatriculaMinAggregateInputType
+    _max?: MatriculaMaxAggregateInputType
+  }
+
+  export type MatriculaGroupByOutputType = {
+    idAluno: string
+    idCurso: string
+    dtMatricula: Date
+    _count: MatriculaCountAggregateOutputType | null
+    _min: MatriculaMinAggregateOutputType | null
+    _max: MatriculaMaxAggregateOutputType | null
+  }
+
+  type GetMatriculaGroupByPayload<T extends MatriculaGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<MatriculaGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof MatriculaGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], MatriculaGroupByOutputType[P]>
+            : GetScalarType<T[P], MatriculaGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type MatriculaSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    idAluno?: boolean
+    idCurso?: boolean
+    dtMatricula?: boolean
+    aluno?: boolean | AlunoDefaultArgs<ExtArgs>
+    curso?: boolean | CursoDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["matricula"]>
+
+  export type MatriculaSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    idAluno?: boolean
+    idCurso?: boolean
+    dtMatricula?: boolean
+    aluno?: boolean | AlunoDefaultArgs<ExtArgs>
+    curso?: boolean | CursoDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["matricula"]>
+
+  export type MatriculaSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    idAluno?: boolean
+    idCurso?: boolean
+    dtMatricula?: boolean
+    aluno?: boolean | AlunoDefaultArgs<ExtArgs>
+    curso?: boolean | CursoDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["matricula"]>
+
+  export type MatriculaSelectScalar = {
+    idAluno?: boolean
+    idCurso?: boolean
+    dtMatricula?: boolean
+  }
+
+  export type MatriculaOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"idAluno" | "idCurso" | "dtMatricula", ExtArgs["result"]["matricula"]>
+  export type MatriculaInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    aluno?: boolean | AlunoDefaultArgs<ExtArgs>
+    curso?: boolean | CursoDefaultArgs<ExtArgs>
+  }
+  export type MatriculaIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    aluno?: boolean | AlunoDefaultArgs<ExtArgs>
+    curso?: boolean | CursoDefaultArgs<ExtArgs>
+  }
+  export type MatriculaIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    aluno?: boolean | AlunoDefaultArgs<ExtArgs>
+    curso?: boolean | CursoDefaultArgs<ExtArgs>
+  }
+
+  export type $MatriculaPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "Matricula"
+    objects: {
+      aluno: Prisma.$AlunoPayload<ExtArgs>
+      curso: Prisma.$CursoPayload<ExtArgs>
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      idAluno: string
+      idCurso: string
+      dtMatricula: Date
+    }, ExtArgs["result"]["matricula"]>
+    composites: {}
+  }
+
+  type MatriculaGetPayload<S extends boolean | null | undefined | MatriculaDefaultArgs> = $Result.GetResult<Prisma.$MatriculaPayload, S>
+
+  type MatriculaCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<MatriculaFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: MatriculaCountAggregateInputType | true
+    }
+
+  export interface MatriculaDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['Matricula'], meta: { name: 'Matricula' } }
+    /**
+     * Find zero or one Matricula that matches the filter.
+     * @param {MatriculaFindUniqueArgs} args - Arguments to find a Matricula
+     * @example
+     * // Get one Matricula
+     * const matricula = await prisma.matricula.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends MatriculaFindUniqueArgs>(args: SelectSubset<T, MatriculaFindUniqueArgs<ExtArgs>>): Prisma__MatriculaClient<$Result.GetResult<Prisma.$MatriculaPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one Matricula that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {MatriculaFindUniqueOrThrowArgs} args - Arguments to find a Matricula
+     * @example
+     * // Get one Matricula
+     * const matricula = await prisma.matricula.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends MatriculaFindUniqueOrThrowArgs>(args: SelectSubset<T, MatriculaFindUniqueOrThrowArgs<ExtArgs>>): Prisma__MatriculaClient<$Result.GetResult<Prisma.$MatriculaPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first Matricula that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {MatriculaFindFirstArgs} args - Arguments to find a Matricula
+     * @example
+     * // Get one Matricula
+     * const matricula = await prisma.matricula.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends MatriculaFindFirstArgs>(args?: SelectSubset<T, MatriculaFindFirstArgs<ExtArgs>>): Prisma__MatriculaClient<$Result.GetResult<Prisma.$MatriculaPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first Matricula that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {MatriculaFindFirstOrThrowArgs} args - Arguments to find a Matricula
+     * @example
+     * // Get one Matricula
+     * const matricula = await prisma.matricula.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends MatriculaFindFirstOrThrowArgs>(args?: SelectSubset<T, MatriculaFindFirstOrThrowArgs<ExtArgs>>): Prisma__MatriculaClient<$Result.GetResult<Prisma.$MatriculaPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more Matriculas that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {MatriculaFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all Matriculas
+     * const matriculas = await prisma.matricula.findMany()
+     * 
+     * // Get first 10 Matriculas
+     * const matriculas = await prisma.matricula.findMany({ take: 10 })
+     * 
+     * // Only select the `idAluno`
+     * const matriculaWithIdAlunoOnly = await prisma.matricula.findMany({ select: { idAluno: true } })
+     * 
+     */
+    findMany<T extends MatriculaFindManyArgs>(args?: SelectSubset<T, MatriculaFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$MatriculaPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a Matricula.
+     * @param {MatriculaCreateArgs} args - Arguments to create a Matricula.
+     * @example
+     * // Create one Matricula
+     * const Matricula = await prisma.matricula.create({
+     *   data: {
+     *     // ... data to create a Matricula
+     *   }
+     * })
+     * 
+     */
+    create<T extends MatriculaCreateArgs>(args: SelectSubset<T, MatriculaCreateArgs<ExtArgs>>): Prisma__MatriculaClient<$Result.GetResult<Prisma.$MatriculaPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many Matriculas.
+     * @param {MatriculaCreateManyArgs} args - Arguments to create many Matriculas.
+     * @example
+     * // Create many Matriculas
+     * const matricula = await prisma.matricula.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends MatriculaCreateManyArgs>(args?: SelectSubset<T, MatriculaCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many Matriculas and returns the data saved in the database.
+     * @param {MatriculaCreateManyAndReturnArgs} args - Arguments to create many Matriculas.
+     * @example
+     * // Create many Matriculas
+     * const matricula = await prisma.matricula.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many Matriculas and only return the `idAluno`
+     * const matriculaWithIdAlunoOnly = await prisma.matricula.createManyAndReturn({
+     *   select: { idAluno: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends MatriculaCreateManyAndReturnArgs>(args?: SelectSubset<T, MatriculaCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$MatriculaPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a Matricula.
+     * @param {MatriculaDeleteArgs} args - Arguments to delete one Matricula.
+     * @example
+     * // Delete one Matricula
+     * const Matricula = await prisma.matricula.delete({
+     *   where: {
+     *     // ... filter to delete one Matricula
+     *   }
+     * })
+     * 
+     */
+    delete<T extends MatriculaDeleteArgs>(args: SelectSubset<T, MatriculaDeleteArgs<ExtArgs>>): Prisma__MatriculaClient<$Result.GetResult<Prisma.$MatriculaPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one Matricula.
+     * @param {MatriculaUpdateArgs} args - Arguments to update one Matricula.
+     * @example
+     * // Update one Matricula
+     * const matricula = await prisma.matricula.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends MatriculaUpdateArgs>(args: SelectSubset<T, MatriculaUpdateArgs<ExtArgs>>): Prisma__MatriculaClient<$Result.GetResult<Prisma.$MatriculaPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more Matriculas.
+     * @param {MatriculaDeleteManyArgs} args - Arguments to filter Matriculas to delete.
+     * @example
+     * // Delete a few Matriculas
+     * const { count } = await prisma.matricula.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends MatriculaDeleteManyArgs>(args?: SelectSubset<T, MatriculaDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Matriculas.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {MatriculaUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many Matriculas
+     * const matricula = await prisma.matricula.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends MatriculaUpdateManyArgs>(args: SelectSubset<T, MatriculaUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Matriculas and returns the data updated in the database.
+     * @param {MatriculaUpdateManyAndReturnArgs} args - Arguments to update many Matriculas.
+     * @example
+     * // Update many Matriculas
+     * const matricula = await prisma.matricula.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more Matriculas and only return the `idAluno`
+     * const matriculaWithIdAlunoOnly = await prisma.matricula.updateManyAndReturn({
+     *   select: { idAluno: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends MatriculaUpdateManyAndReturnArgs>(args: SelectSubset<T, MatriculaUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$MatriculaPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one Matricula.
+     * @param {MatriculaUpsertArgs} args - Arguments to update or create a Matricula.
+     * @example
+     * // Update or create a Matricula
+     * const matricula = await prisma.matricula.upsert({
+     *   create: {
+     *     // ... data to create a Matricula
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the Matricula we want to update
+     *   }
+     * })
+     */
+    upsert<T extends MatriculaUpsertArgs>(args: SelectSubset<T, MatriculaUpsertArgs<ExtArgs>>): Prisma__MatriculaClient<$Result.GetResult<Prisma.$MatriculaPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of Matriculas.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {MatriculaCountArgs} args - Arguments to filter Matriculas to count.
+     * @example
+     * // Count the number of Matriculas
+     * const count = await prisma.matricula.count({
+     *   where: {
+     *     // ... the filter for the Matriculas we want to count
+     *   }
+     * })
+    **/
+    count<T extends MatriculaCountArgs>(
+      args?: Subset<T, MatriculaCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], MatriculaCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a Matricula.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {MatriculaAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends MatriculaAggregateArgs>(args: Subset<T, MatriculaAggregateArgs>): Prisma.PrismaPromise<GetMatriculaAggregateType<T>>
+
+    /**
+     * Group by Matricula.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {MatriculaGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends MatriculaGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: MatriculaGroupByArgs['orderBy'] }
+        : { orderBy?: MatriculaGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, MatriculaGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetMatriculaGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the Matricula model
+   */
+  readonly fields: MatriculaFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for Matricula.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__MatriculaClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    aluno<T extends AlunoDefaultArgs<ExtArgs> = {}>(args?: Subset<T, AlunoDefaultArgs<ExtArgs>>): Prisma__AlunoClient<$Result.GetResult<Prisma.$AlunoPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    curso<T extends CursoDefaultArgs<ExtArgs> = {}>(args?: Subset<T, CursoDefaultArgs<ExtArgs>>): Prisma__CursoClient<$Result.GetResult<Prisma.$CursoPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the Matricula model
+   */
+  interface MatriculaFieldRefs {
+    readonly idAluno: FieldRef<"Matricula", 'String'>
+    readonly idCurso: FieldRef<"Matricula", 'String'>
+    readonly dtMatricula: FieldRef<"Matricula", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * Matricula findUnique
+   */
+  export type MatriculaFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Matricula
+     */
+    select?: MatriculaSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Matricula
+     */
+    omit?: MatriculaOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MatriculaInclude<ExtArgs> | null
+    /**
+     * Filter, which Matricula to fetch.
+     */
+    where: MatriculaWhereUniqueInput
+  }
+
+  /**
+   * Matricula findUniqueOrThrow
+   */
+  export type MatriculaFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Matricula
+     */
+    select?: MatriculaSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Matricula
+     */
+    omit?: MatriculaOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MatriculaInclude<ExtArgs> | null
+    /**
+     * Filter, which Matricula to fetch.
+     */
+    where: MatriculaWhereUniqueInput
+  }
+
+  /**
+   * Matricula findFirst
+   */
+  export type MatriculaFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Matricula
+     */
+    select?: MatriculaSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Matricula
+     */
+    omit?: MatriculaOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MatriculaInclude<ExtArgs> | null
+    /**
+     * Filter, which Matricula to fetch.
+     */
+    where?: MatriculaWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Matriculas to fetch.
+     */
+    orderBy?: MatriculaOrderByWithRelationInput | MatriculaOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Matriculas.
+     */
+    cursor?: MatriculaWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Matriculas from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Matriculas.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Matriculas.
+     */
+    distinct?: MatriculaScalarFieldEnum | MatriculaScalarFieldEnum[]
+  }
+
+  /**
+   * Matricula findFirstOrThrow
+   */
+  export type MatriculaFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Matricula
+     */
+    select?: MatriculaSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Matricula
+     */
+    omit?: MatriculaOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MatriculaInclude<ExtArgs> | null
+    /**
+     * Filter, which Matricula to fetch.
+     */
+    where?: MatriculaWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Matriculas to fetch.
+     */
+    orderBy?: MatriculaOrderByWithRelationInput | MatriculaOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Matriculas.
+     */
+    cursor?: MatriculaWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Matriculas from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Matriculas.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Matriculas.
+     */
+    distinct?: MatriculaScalarFieldEnum | MatriculaScalarFieldEnum[]
+  }
+
+  /**
+   * Matricula findMany
+   */
+  export type MatriculaFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Matricula
+     */
+    select?: MatriculaSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Matricula
+     */
+    omit?: MatriculaOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MatriculaInclude<ExtArgs> | null
+    /**
+     * Filter, which Matriculas to fetch.
+     */
+    where?: MatriculaWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Matriculas to fetch.
+     */
+    orderBy?: MatriculaOrderByWithRelationInput | MatriculaOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing Matriculas.
+     */
+    cursor?: MatriculaWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Matriculas from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Matriculas.
+     */
+    skip?: number
+    distinct?: MatriculaScalarFieldEnum | MatriculaScalarFieldEnum[]
+  }
+
+  /**
+   * Matricula create
+   */
+  export type MatriculaCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Matricula
+     */
+    select?: MatriculaSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Matricula
+     */
+    omit?: MatriculaOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MatriculaInclude<ExtArgs> | null
+    /**
+     * The data needed to create a Matricula.
+     */
+    data: XOR<MatriculaCreateInput, MatriculaUncheckedCreateInput>
+  }
+
+  /**
+   * Matricula createMany
+   */
+  export type MatriculaCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many Matriculas.
+     */
+    data: MatriculaCreateManyInput | MatriculaCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * Matricula createManyAndReturn
+   */
+  export type MatriculaCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Matricula
+     */
+    select?: MatriculaSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the Matricula
+     */
+    omit?: MatriculaOmit<ExtArgs> | null
+    /**
+     * The data used to create many Matriculas.
+     */
+    data: MatriculaCreateManyInput | MatriculaCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MatriculaIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * Matricula update
+   */
+  export type MatriculaUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Matricula
+     */
+    select?: MatriculaSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Matricula
+     */
+    omit?: MatriculaOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MatriculaInclude<ExtArgs> | null
+    /**
+     * The data needed to update a Matricula.
+     */
+    data: XOR<MatriculaUpdateInput, MatriculaUncheckedUpdateInput>
+    /**
+     * Choose, which Matricula to update.
+     */
+    where: MatriculaWhereUniqueInput
+  }
+
+  /**
+   * Matricula updateMany
+   */
+  export type MatriculaUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update Matriculas.
+     */
+    data: XOR<MatriculaUpdateManyMutationInput, MatriculaUncheckedUpdateManyInput>
+    /**
+     * Filter which Matriculas to update
+     */
+    where?: MatriculaWhereInput
+    /**
+     * Limit how many Matriculas to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * Matricula updateManyAndReturn
+   */
+  export type MatriculaUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Matricula
+     */
+    select?: MatriculaSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the Matricula
+     */
+    omit?: MatriculaOmit<ExtArgs> | null
+    /**
+     * The data used to update Matriculas.
+     */
+    data: XOR<MatriculaUpdateManyMutationInput, MatriculaUncheckedUpdateManyInput>
+    /**
+     * Filter which Matriculas to update
+     */
+    where?: MatriculaWhereInput
+    /**
+     * Limit how many Matriculas to update.
+     */
+    limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MatriculaIncludeUpdateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * Matricula upsert
+   */
+  export type MatriculaUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Matricula
+     */
+    select?: MatriculaSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Matricula
+     */
+    omit?: MatriculaOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MatriculaInclude<ExtArgs> | null
+    /**
+     * The filter to search for the Matricula to update in case it exists.
+     */
+    where: MatriculaWhereUniqueInput
+    /**
+     * In case the Matricula found by the `where` argument doesn't exist, create a new Matricula with this data.
+     */
+    create: XOR<MatriculaCreateInput, MatriculaUncheckedCreateInput>
+    /**
+     * In case the Matricula was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<MatriculaUpdateInput, MatriculaUncheckedUpdateInput>
+  }
+
+  /**
+   * Matricula delete
+   */
+  export type MatriculaDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Matricula
+     */
+    select?: MatriculaSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Matricula
+     */
+    omit?: MatriculaOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MatriculaInclude<ExtArgs> | null
+    /**
+     * Filter which Matricula to delete.
+     */
+    where: MatriculaWhereUniqueInput
+  }
+
+  /**
+   * Matricula deleteMany
+   */
+  export type MatriculaDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which Matriculas to delete
+     */
+    where?: MatriculaWhereInput
+    /**
+     * Limit how many Matriculas to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * Matricula without action
+   */
+  export type MatriculaDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Matricula
+     */
+    select?: MatriculaSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Matricula
+     */
+    omit?: MatriculaOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MatriculaInclude<ExtArgs> | null
   }
 
 
@@ -6818,6 +8092,15 @@ export namespace Prisma {
   export type CursoScalarFieldEnum = (typeof CursoScalarFieldEnum)[keyof typeof CursoScalarFieldEnum]
 
 
+  export const MatriculaScalarFieldEnum: {
+    idAluno: 'idAluno',
+    idCurso: 'idCurso',
+    dtMatricula: 'dtMatricula'
+  };
+
+  export type MatriculaScalarFieldEnum = (typeof MatriculaScalarFieldEnum)[keyof typeof MatriculaScalarFieldEnum]
+
+
   export const MaterialScalarFieldEnum: {
     id: 'id',
     titulo: 'titulo',
@@ -6954,6 +8237,7 @@ export namespace Prisma {
     dataAtualizacao?: DateTimeFilter<"Aluno"> | Date | string
     endereco?: XOR<EnderecoNullableScalarRelationFilter, EnderecoWhereInput> | null
     avaliacoes?: AvaliacaoListRelationFilter
+    matriculas?: MatriculaListRelationFilter
   }
 
   export type AlunoOrderByWithRelationInput = {
@@ -6967,6 +8251,7 @@ export namespace Prisma {
     dataAtualizacao?: SortOrder
     endereco?: EnderecoOrderByWithRelationInput
     avaliacoes?: AvaliacaoOrderByRelationAggregateInput
+    matriculas?: MatriculaOrderByRelationAggregateInput
   }
 
   export type AlunoWhereUniqueInput = Prisma.AtLeast<{
@@ -6983,6 +8268,7 @@ export namespace Prisma {
     dataAtualizacao?: DateTimeFilter<"Aluno"> | Date | string
     endereco?: XOR<EnderecoNullableScalarRelationFilter, EnderecoWhereInput> | null
     avaliacoes?: AvaliacaoListRelationFilter
+    matriculas?: MatriculaListRelationFilter
   }, "id" | "email">
 
   export type AlunoOrderByWithAggregationInput = {
@@ -7146,6 +8432,7 @@ export namespace Prisma {
     status?: StringFilter<"Curso"> | string
     dataCriacao?: DateTimeFilter<"Curso"> | Date | string
     dataAtualizacao?: DateTimeFilter<"Curso"> | Date | string
+    matriculas?: MatriculaListRelationFilter
   }
 
   export type CursoOrderByWithRelationInput = {
@@ -7157,6 +8444,7 @@ export namespace Prisma {
     status?: SortOrder
     dataCriacao?: SortOrder
     dataAtualizacao?: SortOrder
+    matriculas?: MatriculaOrderByRelationAggregateInput
   }
 
   export type CursoWhereUniqueInput = Prisma.AtLeast<{
@@ -7171,6 +8459,7 @@ export namespace Prisma {
     status?: StringFilter<"Curso"> | string
     dataCriacao?: DateTimeFilter<"Curso"> | Date | string
     dataAtualizacao?: DateTimeFilter<"Curso"> | Date | string
+    matriculas?: MatriculaListRelationFilter
   }, "id">
 
   export type CursoOrderByWithAggregationInput = {
@@ -7201,6 +8490,55 @@ export namespace Prisma {
     status?: StringWithAggregatesFilter<"Curso"> | string
     dataCriacao?: DateTimeWithAggregatesFilter<"Curso"> | Date | string
     dataAtualizacao?: DateTimeWithAggregatesFilter<"Curso"> | Date | string
+  }
+
+  export type MatriculaWhereInput = {
+    AND?: MatriculaWhereInput | MatriculaWhereInput[]
+    OR?: MatriculaWhereInput[]
+    NOT?: MatriculaWhereInput | MatriculaWhereInput[]
+    idAluno?: StringFilter<"Matricula"> | string
+    idCurso?: StringFilter<"Matricula"> | string
+    dtMatricula?: DateTimeFilter<"Matricula"> | Date | string
+    aluno?: XOR<AlunoScalarRelationFilter, AlunoWhereInput>
+    curso?: XOR<CursoScalarRelationFilter, CursoWhereInput>
+  }
+
+  export type MatriculaOrderByWithRelationInput = {
+    idAluno?: SortOrder
+    idCurso?: SortOrder
+    dtMatricula?: SortOrder
+    aluno?: AlunoOrderByWithRelationInput
+    curso?: CursoOrderByWithRelationInput
+  }
+
+  export type MatriculaWhereUniqueInput = Prisma.AtLeast<{
+    idAluno_idCurso?: MatriculaIdAlunoIdCursoCompoundUniqueInput
+    AND?: MatriculaWhereInput | MatriculaWhereInput[]
+    OR?: MatriculaWhereInput[]
+    NOT?: MatriculaWhereInput | MatriculaWhereInput[]
+    idAluno?: StringFilter<"Matricula"> | string
+    idCurso?: StringFilter<"Matricula"> | string
+    dtMatricula?: DateTimeFilter<"Matricula"> | Date | string
+    aluno?: XOR<AlunoScalarRelationFilter, AlunoWhereInput>
+    curso?: XOR<CursoScalarRelationFilter, CursoWhereInput>
+  }, "idAluno_idCurso">
+
+  export type MatriculaOrderByWithAggregationInput = {
+    idAluno?: SortOrder
+    idCurso?: SortOrder
+    dtMatricula?: SortOrder
+    _count?: MatriculaCountOrderByAggregateInput
+    _max?: MatriculaMaxOrderByAggregateInput
+    _min?: MatriculaMinOrderByAggregateInput
+  }
+
+  export type MatriculaScalarWhereWithAggregatesInput = {
+    AND?: MatriculaScalarWhereWithAggregatesInput | MatriculaScalarWhereWithAggregatesInput[]
+    OR?: MatriculaScalarWhereWithAggregatesInput[]
+    NOT?: MatriculaScalarWhereWithAggregatesInput | MatriculaScalarWhereWithAggregatesInput[]
+    idAluno?: StringWithAggregatesFilter<"Matricula"> | string
+    idCurso?: StringWithAggregatesFilter<"Matricula"> | string
+    dtMatricula?: DateTimeWithAggregatesFilter<"Matricula"> | Date | string
   }
 
   export type MaterialWhereInput = {
@@ -7278,6 +8616,7 @@ export namespace Prisma {
     dataAtualizacao?: Date | string
     endereco?: EnderecoCreateNestedOneWithoutAlunoInput
     avaliacoes?: AvaliacaoCreateNestedManyWithoutAlunoInput
+    matriculas?: MatriculaCreateNestedManyWithoutAlunoInput
   }
 
   export type AlunoUncheckedCreateInput = {
@@ -7291,6 +8630,7 @@ export namespace Prisma {
     dataAtualizacao?: Date | string
     endereco?: EnderecoUncheckedCreateNestedOneWithoutAlunoInput
     avaliacoes?: AvaliacaoUncheckedCreateNestedManyWithoutAlunoInput
+    matriculas?: MatriculaUncheckedCreateNestedManyWithoutAlunoInput
   }
 
   export type AlunoUpdateInput = {
@@ -7304,6 +8644,7 @@ export namespace Prisma {
     dataAtualizacao?: DateTimeFieldUpdateOperationsInput | Date | string
     endereco?: EnderecoUpdateOneWithoutAlunoNestedInput
     avaliacoes?: AvaliacaoUpdateManyWithoutAlunoNestedInput
+    matriculas?: MatriculaUpdateManyWithoutAlunoNestedInput
   }
 
   export type AlunoUncheckedUpdateInput = {
@@ -7317,6 +8658,7 @@ export namespace Prisma {
     dataAtualizacao?: DateTimeFieldUpdateOperationsInput | Date | string
     endereco?: EnderecoUncheckedUpdateOneWithoutAlunoNestedInput
     avaliacoes?: AvaliacaoUncheckedUpdateManyWithoutAlunoNestedInput
+    matriculas?: MatriculaUncheckedUpdateManyWithoutAlunoNestedInput
   }
 
   export type AlunoCreateManyInput = {
@@ -7478,6 +8820,7 @@ export namespace Prisma {
     status: string
     dataCriacao?: Date | string
     dataAtualizacao?: Date | string
+    matriculas?: MatriculaCreateNestedManyWithoutCursoInput
   }
 
   export type CursoUncheckedCreateInput = {
@@ -7489,6 +8832,7 @@ export namespace Prisma {
     status: string
     dataCriacao?: Date | string
     dataAtualizacao?: Date | string
+    matriculas?: MatriculaUncheckedCreateNestedManyWithoutCursoInput
   }
 
   export type CursoUpdateInput = {
@@ -7500,6 +8844,7 @@ export namespace Prisma {
     status?: StringFieldUpdateOperationsInput | string
     dataCriacao?: DateTimeFieldUpdateOperationsInput | Date | string
     dataAtualizacao?: DateTimeFieldUpdateOperationsInput | Date | string
+    matriculas?: MatriculaUpdateManyWithoutCursoNestedInput
   }
 
   export type CursoUncheckedUpdateInput = {
@@ -7511,6 +8856,7 @@ export namespace Prisma {
     status?: StringFieldUpdateOperationsInput | string
     dataCriacao?: DateTimeFieldUpdateOperationsInput | Date | string
     dataAtualizacao?: DateTimeFieldUpdateOperationsInput | Date | string
+    matriculas?: MatriculaUncheckedUpdateManyWithoutCursoNestedInput
   }
 
   export type CursoCreateManyInput = {
@@ -7544,6 +8890,46 @@ export namespace Prisma {
     status?: StringFieldUpdateOperationsInput | string
     dataCriacao?: DateTimeFieldUpdateOperationsInput | Date | string
     dataAtualizacao?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type MatriculaCreateInput = {
+    dtMatricula?: Date | string
+    aluno: AlunoCreateNestedOneWithoutMatriculasInput
+    curso: CursoCreateNestedOneWithoutMatriculasInput
+  }
+
+  export type MatriculaUncheckedCreateInput = {
+    idAluno: string
+    idCurso: string
+    dtMatricula?: Date | string
+  }
+
+  export type MatriculaUpdateInput = {
+    dtMatricula?: DateTimeFieldUpdateOperationsInput | Date | string
+    aluno?: AlunoUpdateOneRequiredWithoutMatriculasNestedInput
+    curso?: CursoUpdateOneRequiredWithoutMatriculasNestedInput
+  }
+
+  export type MatriculaUncheckedUpdateInput = {
+    idAluno?: StringFieldUpdateOperationsInput | string
+    idCurso?: StringFieldUpdateOperationsInput | string
+    dtMatricula?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type MatriculaCreateManyInput = {
+    idAluno: string
+    idCurso: string
+    dtMatricula?: Date | string
+  }
+
+  export type MatriculaUpdateManyMutationInput = {
+    dtMatricula?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type MatriculaUncheckedUpdateManyInput = {
+    idAluno?: StringFieldUpdateOperationsInput | string
+    idCurso?: StringFieldUpdateOperationsInput | string
+    dtMatricula?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type MaterialCreateInput = {
@@ -7677,12 +9063,22 @@ export namespace Prisma {
     none?: AvaliacaoWhereInput
   }
 
+  export type MatriculaListRelationFilter = {
+    every?: MatriculaWhereInput
+    some?: MatriculaWhereInput
+    none?: MatriculaWhereInput
+  }
+
   export type SortOrderInput = {
     sort: SortOrder
     nulls?: NullsOrder
   }
 
   export type AvaliacaoOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type MatriculaOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
 
@@ -7966,6 +9362,34 @@ export namespace Prisma {
     _max?: NestedDecimalFilter<$PrismaModel>
   }
 
+  export type CursoScalarRelationFilter = {
+    is?: CursoWhereInput
+    isNot?: CursoWhereInput
+  }
+
+  export type MatriculaIdAlunoIdCursoCompoundUniqueInput = {
+    idAluno: string
+    idCurso: string
+  }
+
+  export type MatriculaCountOrderByAggregateInput = {
+    idAluno?: SortOrder
+    idCurso?: SortOrder
+    dtMatricula?: SortOrder
+  }
+
+  export type MatriculaMaxOrderByAggregateInput = {
+    idAluno?: SortOrder
+    idCurso?: SortOrder
+    dtMatricula?: SortOrder
+  }
+
+  export type MatriculaMinOrderByAggregateInput = {
+    idAluno?: SortOrder
+    idCurso?: SortOrder
+    dtMatricula?: SortOrder
+  }
+
   export type MaterialCountOrderByAggregateInput = {
     id?: SortOrder
     titulo?: SortOrder
@@ -8017,6 +9441,13 @@ export namespace Prisma {
     connect?: AvaliacaoWhereUniqueInput | AvaliacaoWhereUniqueInput[]
   }
 
+  export type MatriculaCreateNestedManyWithoutAlunoInput = {
+    create?: XOR<MatriculaCreateWithoutAlunoInput, MatriculaUncheckedCreateWithoutAlunoInput> | MatriculaCreateWithoutAlunoInput[] | MatriculaUncheckedCreateWithoutAlunoInput[]
+    connectOrCreate?: MatriculaCreateOrConnectWithoutAlunoInput | MatriculaCreateOrConnectWithoutAlunoInput[]
+    createMany?: MatriculaCreateManyAlunoInputEnvelope
+    connect?: MatriculaWhereUniqueInput | MatriculaWhereUniqueInput[]
+  }
+
   export type EnderecoUncheckedCreateNestedOneWithoutAlunoInput = {
     create?: XOR<EnderecoCreateWithoutAlunoInput, EnderecoUncheckedCreateWithoutAlunoInput>
     connectOrCreate?: EnderecoCreateOrConnectWithoutAlunoInput
@@ -8028,6 +9459,13 @@ export namespace Prisma {
     connectOrCreate?: AvaliacaoCreateOrConnectWithoutAlunoInput | AvaliacaoCreateOrConnectWithoutAlunoInput[]
     createMany?: AvaliacaoCreateManyAlunoInputEnvelope
     connect?: AvaliacaoWhereUniqueInput | AvaliacaoWhereUniqueInput[]
+  }
+
+  export type MatriculaUncheckedCreateNestedManyWithoutAlunoInput = {
+    create?: XOR<MatriculaCreateWithoutAlunoInput, MatriculaUncheckedCreateWithoutAlunoInput> | MatriculaCreateWithoutAlunoInput[] | MatriculaUncheckedCreateWithoutAlunoInput[]
+    connectOrCreate?: MatriculaCreateOrConnectWithoutAlunoInput | MatriculaCreateOrConnectWithoutAlunoInput[]
+    createMany?: MatriculaCreateManyAlunoInputEnvelope
+    connect?: MatriculaWhereUniqueInput | MatriculaWhereUniqueInput[]
   }
 
   export type StringFieldUpdateOperationsInput = {
@@ -8078,6 +9516,20 @@ export namespace Prisma {
     deleteMany?: AvaliacaoScalarWhereInput | AvaliacaoScalarWhereInput[]
   }
 
+  export type MatriculaUpdateManyWithoutAlunoNestedInput = {
+    create?: XOR<MatriculaCreateWithoutAlunoInput, MatriculaUncheckedCreateWithoutAlunoInput> | MatriculaCreateWithoutAlunoInput[] | MatriculaUncheckedCreateWithoutAlunoInput[]
+    connectOrCreate?: MatriculaCreateOrConnectWithoutAlunoInput | MatriculaCreateOrConnectWithoutAlunoInput[]
+    upsert?: MatriculaUpsertWithWhereUniqueWithoutAlunoInput | MatriculaUpsertWithWhereUniqueWithoutAlunoInput[]
+    createMany?: MatriculaCreateManyAlunoInputEnvelope
+    set?: MatriculaWhereUniqueInput | MatriculaWhereUniqueInput[]
+    disconnect?: MatriculaWhereUniqueInput | MatriculaWhereUniqueInput[]
+    delete?: MatriculaWhereUniqueInput | MatriculaWhereUniqueInput[]
+    connect?: MatriculaWhereUniqueInput | MatriculaWhereUniqueInput[]
+    update?: MatriculaUpdateWithWhereUniqueWithoutAlunoInput | MatriculaUpdateWithWhereUniqueWithoutAlunoInput[]
+    updateMany?: MatriculaUpdateManyWithWhereWithoutAlunoInput | MatriculaUpdateManyWithWhereWithoutAlunoInput[]
+    deleteMany?: MatriculaScalarWhereInput | MatriculaScalarWhereInput[]
+  }
+
   export type EnderecoUncheckedUpdateOneWithoutAlunoNestedInput = {
     create?: XOR<EnderecoCreateWithoutAlunoInput, EnderecoUncheckedCreateWithoutAlunoInput>
     connectOrCreate?: EnderecoCreateOrConnectWithoutAlunoInput
@@ -8100,6 +9552,20 @@ export namespace Prisma {
     update?: AvaliacaoUpdateWithWhereUniqueWithoutAlunoInput | AvaliacaoUpdateWithWhereUniqueWithoutAlunoInput[]
     updateMany?: AvaliacaoUpdateManyWithWhereWithoutAlunoInput | AvaliacaoUpdateManyWithWhereWithoutAlunoInput[]
     deleteMany?: AvaliacaoScalarWhereInput | AvaliacaoScalarWhereInput[]
+  }
+
+  export type MatriculaUncheckedUpdateManyWithoutAlunoNestedInput = {
+    create?: XOR<MatriculaCreateWithoutAlunoInput, MatriculaUncheckedCreateWithoutAlunoInput> | MatriculaCreateWithoutAlunoInput[] | MatriculaUncheckedCreateWithoutAlunoInput[]
+    connectOrCreate?: MatriculaCreateOrConnectWithoutAlunoInput | MatriculaCreateOrConnectWithoutAlunoInput[]
+    upsert?: MatriculaUpsertWithWhereUniqueWithoutAlunoInput | MatriculaUpsertWithWhereUniqueWithoutAlunoInput[]
+    createMany?: MatriculaCreateManyAlunoInputEnvelope
+    set?: MatriculaWhereUniqueInput | MatriculaWhereUniqueInput[]
+    disconnect?: MatriculaWhereUniqueInput | MatriculaWhereUniqueInput[]
+    delete?: MatriculaWhereUniqueInput | MatriculaWhereUniqueInput[]
+    connect?: MatriculaWhereUniqueInput | MatriculaWhereUniqueInput[]
+    update?: MatriculaUpdateWithWhereUniqueWithoutAlunoInput | MatriculaUpdateWithWhereUniqueWithoutAlunoInput[]
+    updateMany?: MatriculaUpdateManyWithWhereWithoutAlunoInput | MatriculaUpdateManyWithWhereWithoutAlunoInput[]
+    deleteMany?: MatriculaScalarWhereInput | MatriculaScalarWhereInput[]
   }
 
   export type AlunoCreateNestedOneWithoutEnderecoInput = {
@@ -8138,12 +9604,82 @@ export namespace Prisma {
     update?: XOR<XOR<AlunoUpdateToOneWithWhereWithoutAvaliacoesInput, AlunoUpdateWithoutAvaliacoesInput>, AlunoUncheckedUpdateWithoutAvaliacoesInput>
   }
 
+  export type MatriculaCreateNestedManyWithoutCursoInput = {
+    create?: XOR<MatriculaCreateWithoutCursoInput, MatriculaUncheckedCreateWithoutCursoInput> | MatriculaCreateWithoutCursoInput[] | MatriculaUncheckedCreateWithoutCursoInput[]
+    connectOrCreate?: MatriculaCreateOrConnectWithoutCursoInput | MatriculaCreateOrConnectWithoutCursoInput[]
+    createMany?: MatriculaCreateManyCursoInputEnvelope
+    connect?: MatriculaWhereUniqueInput | MatriculaWhereUniqueInput[]
+  }
+
+  export type MatriculaUncheckedCreateNestedManyWithoutCursoInput = {
+    create?: XOR<MatriculaCreateWithoutCursoInput, MatriculaUncheckedCreateWithoutCursoInput> | MatriculaCreateWithoutCursoInput[] | MatriculaUncheckedCreateWithoutCursoInput[]
+    connectOrCreate?: MatriculaCreateOrConnectWithoutCursoInput | MatriculaCreateOrConnectWithoutCursoInput[]
+    createMany?: MatriculaCreateManyCursoInputEnvelope
+    connect?: MatriculaWhereUniqueInput | MatriculaWhereUniqueInput[]
+  }
+
   export type DecimalFieldUpdateOperationsInput = {
     set?: Decimal | DecimalJsLike | number | string
     increment?: Decimal | DecimalJsLike | number | string
     decrement?: Decimal | DecimalJsLike | number | string
     multiply?: Decimal | DecimalJsLike | number | string
     divide?: Decimal | DecimalJsLike | number | string
+  }
+
+  export type MatriculaUpdateManyWithoutCursoNestedInput = {
+    create?: XOR<MatriculaCreateWithoutCursoInput, MatriculaUncheckedCreateWithoutCursoInput> | MatriculaCreateWithoutCursoInput[] | MatriculaUncheckedCreateWithoutCursoInput[]
+    connectOrCreate?: MatriculaCreateOrConnectWithoutCursoInput | MatriculaCreateOrConnectWithoutCursoInput[]
+    upsert?: MatriculaUpsertWithWhereUniqueWithoutCursoInput | MatriculaUpsertWithWhereUniqueWithoutCursoInput[]
+    createMany?: MatriculaCreateManyCursoInputEnvelope
+    set?: MatriculaWhereUniqueInput | MatriculaWhereUniqueInput[]
+    disconnect?: MatriculaWhereUniqueInput | MatriculaWhereUniqueInput[]
+    delete?: MatriculaWhereUniqueInput | MatriculaWhereUniqueInput[]
+    connect?: MatriculaWhereUniqueInput | MatriculaWhereUniqueInput[]
+    update?: MatriculaUpdateWithWhereUniqueWithoutCursoInput | MatriculaUpdateWithWhereUniqueWithoutCursoInput[]
+    updateMany?: MatriculaUpdateManyWithWhereWithoutCursoInput | MatriculaUpdateManyWithWhereWithoutCursoInput[]
+    deleteMany?: MatriculaScalarWhereInput | MatriculaScalarWhereInput[]
+  }
+
+  export type MatriculaUncheckedUpdateManyWithoutCursoNestedInput = {
+    create?: XOR<MatriculaCreateWithoutCursoInput, MatriculaUncheckedCreateWithoutCursoInput> | MatriculaCreateWithoutCursoInput[] | MatriculaUncheckedCreateWithoutCursoInput[]
+    connectOrCreate?: MatriculaCreateOrConnectWithoutCursoInput | MatriculaCreateOrConnectWithoutCursoInput[]
+    upsert?: MatriculaUpsertWithWhereUniqueWithoutCursoInput | MatriculaUpsertWithWhereUniqueWithoutCursoInput[]
+    createMany?: MatriculaCreateManyCursoInputEnvelope
+    set?: MatriculaWhereUniqueInput | MatriculaWhereUniqueInput[]
+    disconnect?: MatriculaWhereUniqueInput | MatriculaWhereUniqueInput[]
+    delete?: MatriculaWhereUniqueInput | MatriculaWhereUniqueInput[]
+    connect?: MatriculaWhereUniqueInput | MatriculaWhereUniqueInput[]
+    update?: MatriculaUpdateWithWhereUniqueWithoutCursoInput | MatriculaUpdateWithWhereUniqueWithoutCursoInput[]
+    updateMany?: MatriculaUpdateManyWithWhereWithoutCursoInput | MatriculaUpdateManyWithWhereWithoutCursoInput[]
+    deleteMany?: MatriculaScalarWhereInput | MatriculaScalarWhereInput[]
+  }
+
+  export type AlunoCreateNestedOneWithoutMatriculasInput = {
+    create?: XOR<AlunoCreateWithoutMatriculasInput, AlunoUncheckedCreateWithoutMatriculasInput>
+    connectOrCreate?: AlunoCreateOrConnectWithoutMatriculasInput
+    connect?: AlunoWhereUniqueInput
+  }
+
+  export type CursoCreateNestedOneWithoutMatriculasInput = {
+    create?: XOR<CursoCreateWithoutMatriculasInput, CursoUncheckedCreateWithoutMatriculasInput>
+    connectOrCreate?: CursoCreateOrConnectWithoutMatriculasInput
+    connect?: CursoWhereUniqueInput
+  }
+
+  export type AlunoUpdateOneRequiredWithoutMatriculasNestedInput = {
+    create?: XOR<AlunoCreateWithoutMatriculasInput, AlunoUncheckedCreateWithoutMatriculasInput>
+    connectOrCreate?: AlunoCreateOrConnectWithoutMatriculasInput
+    upsert?: AlunoUpsertWithoutMatriculasInput
+    connect?: AlunoWhereUniqueInput
+    update?: XOR<XOR<AlunoUpdateToOneWithWhereWithoutMatriculasInput, AlunoUpdateWithoutMatriculasInput>, AlunoUncheckedUpdateWithoutMatriculasInput>
+  }
+
+  export type CursoUpdateOneRequiredWithoutMatriculasNestedInput = {
+    create?: XOR<CursoCreateWithoutMatriculasInput, CursoUncheckedCreateWithoutMatriculasInput>
+    connectOrCreate?: CursoCreateOrConnectWithoutMatriculasInput
+    upsert?: CursoUpsertWithoutMatriculasInput
+    connect?: CursoWhereUniqueInput
+    update?: XOR<XOR<CursoUpdateToOneWithWhereWithoutMatriculasInput, CursoUpdateWithoutMatriculasInput>, CursoUncheckedUpdateWithoutMatriculasInput>
   }
 
   export type NestedStringFilter<$PrismaModel = never> = {
@@ -8388,6 +9924,26 @@ export namespace Prisma {
     skipDuplicates?: boolean
   }
 
+  export type MatriculaCreateWithoutAlunoInput = {
+    dtMatricula?: Date | string
+    curso: CursoCreateNestedOneWithoutMatriculasInput
+  }
+
+  export type MatriculaUncheckedCreateWithoutAlunoInput = {
+    idCurso: string
+    dtMatricula?: Date | string
+  }
+
+  export type MatriculaCreateOrConnectWithoutAlunoInput = {
+    where: MatriculaWhereUniqueInput
+    create: XOR<MatriculaCreateWithoutAlunoInput, MatriculaUncheckedCreateWithoutAlunoInput>
+  }
+
+  export type MatriculaCreateManyAlunoInputEnvelope = {
+    data: MatriculaCreateManyAlunoInput | MatriculaCreateManyAlunoInput[]
+    skipDuplicates?: boolean
+  }
+
   export type EnderecoUpsertWithoutAlunoInput = {
     update: XOR<EnderecoUpdateWithoutAlunoInput, EnderecoUncheckedUpdateWithoutAlunoInput>
     create: XOR<EnderecoCreateWithoutAlunoInput, EnderecoUncheckedCreateWithoutAlunoInput>
@@ -8442,6 +9998,31 @@ export namespace Prisma {
     idAluno?: StringFilter<"Avaliacao"> | string
   }
 
+  export type MatriculaUpsertWithWhereUniqueWithoutAlunoInput = {
+    where: MatriculaWhereUniqueInput
+    update: XOR<MatriculaUpdateWithoutAlunoInput, MatriculaUncheckedUpdateWithoutAlunoInput>
+    create: XOR<MatriculaCreateWithoutAlunoInput, MatriculaUncheckedCreateWithoutAlunoInput>
+  }
+
+  export type MatriculaUpdateWithWhereUniqueWithoutAlunoInput = {
+    where: MatriculaWhereUniqueInput
+    data: XOR<MatriculaUpdateWithoutAlunoInput, MatriculaUncheckedUpdateWithoutAlunoInput>
+  }
+
+  export type MatriculaUpdateManyWithWhereWithoutAlunoInput = {
+    where: MatriculaScalarWhereInput
+    data: XOR<MatriculaUpdateManyMutationInput, MatriculaUncheckedUpdateManyWithoutAlunoInput>
+  }
+
+  export type MatriculaScalarWhereInput = {
+    AND?: MatriculaScalarWhereInput | MatriculaScalarWhereInput[]
+    OR?: MatriculaScalarWhereInput[]
+    NOT?: MatriculaScalarWhereInput | MatriculaScalarWhereInput[]
+    idAluno?: StringFilter<"Matricula"> | string
+    idCurso?: StringFilter<"Matricula"> | string
+    dtMatricula?: DateTimeFilter<"Matricula"> | Date | string
+  }
+
   export type AlunoCreateWithoutEnderecoInput = {
     id?: string
     nome: string
@@ -8452,6 +10033,7 @@ export namespace Prisma {
     dataCriacao?: Date | string
     dataAtualizacao?: Date | string
     avaliacoes?: AvaliacaoCreateNestedManyWithoutAlunoInput
+    matriculas?: MatriculaCreateNestedManyWithoutAlunoInput
   }
 
   export type AlunoUncheckedCreateWithoutEnderecoInput = {
@@ -8464,6 +10046,7 @@ export namespace Prisma {
     dataCriacao?: Date | string
     dataAtualizacao?: Date | string
     avaliacoes?: AvaliacaoUncheckedCreateNestedManyWithoutAlunoInput
+    matriculas?: MatriculaUncheckedCreateNestedManyWithoutAlunoInput
   }
 
   export type AlunoCreateOrConnectWithoutEnderecoInput = {
@@ -8492,6 +10075,7 @@ export namespace Prisma {
     dataCriacao?: DateTimeFieldUpdateOperationsInput | Date | string
     dataAtualizacao?: DateTimeFieldUpdateOperationsInput | Date | string
     avaliacoes?: AvaliacaoUpdateManyWithoutAlunoNestedInput
+    matriculas?: MatriculaUpdateManyWithoutAlunoNestedInput
   }
 
   export type AlunoUncheckedUpdateWithoutEnderecoInput = {
@@ -8504,6 +10088,7 @@ export namespace Prisma {
     dataCriacao?: DateTimeFieldUpdateOperationsInput | Date | string
     dataAtualizacao?: DateTimeFieldUpdateOperationsInput | Date | string
     avaliacoes?: AvaliacaoUncheckedUpdateManyWithoutAlunoNestedInput
+    matriculas?: MatriculaUncheckedUpdateManyWithoutAlunoNestedInput
   }
 
   export type AlunoCreateWithoutAvaliacoesInput = {
@@ -8516,6 +10101,7 @@ export namespace Prisma {
     dataCriacao?: Date | string
     dataAtualizacao?: Date | string
     endereco?: EnderecoCreateNestedOneWithoutAlunoInput
+    matriculas?: MatriculaCreateNestedManyWithoutAlunoInput
   }
 
   export type AlunoUncheckedCreateWithoutAvaliacoesInput = {
@@ -8528,6 +10114,7 @@ export namespace Prisma {
     dataCriacao?: Date | string
     dataAtualizacao?: Date | string
     endereco?: EnderecoUncheckedCreateNestedOneWithoutAlunoInput
+    matriculas?: MatriculaUncheckedCreateNestedManyWithoutAlunoInput
   }
 
   export type AlunoCreateOrConnectWithoutAvaliacoesInput = {
@@ -8556,6 +10143,7 @@ export namespace Prisma {
     dataCriacao?: DateTimeFieldUpdateOperationsInput | Date | string
     dataAtualizacao?: DateTimeFieldUpdateOperationsInput | Date | string
     endereco?: EnderecoUpdateOneWithoutAlunoNestedInput
+    matriculas?: MatriculaUpdateManyWithoutAlunoNestedInput
   }
 
   export type AlunoUncheckedUpdateWithoutAvaliacoesInput = {
@@ -8568,6 +10156,171 @@ export namespace Prisma {
     dataCriacao?: DateTimeFieldUpdateOperationsInput | Date | string
     dataAtualizacao?: DateTimeFieldUpdateOperationsInput | Date | string
     endereco?: EnderecoUncheckedUpdateOneWithoutAlunoNestedInput
+    matriculas?: MatriculaUncheckedUpdateManyWithoutAlunoNestedInput
+  }
+
+  export type MatriculaCreateWithoutCursoInput = {
+    dtMatricula?: Date | string
+    aluno: AlunoCreateNestedOneWithoutMatriculasInput
+  }
+
+  export type MatriculaUncheckedCreateWithoutCursoInput = {
+    idAluno: string
+    dtMatricula?: Date | string
+  }
+
+  export type MatriculaCreateOrConnectWithoutCursoInput = {
+    where: MatriculaWhereUniqueInput
+    create: XOR<MatriculaCreateWithoutCursoInput, MatriculaUncheckedCreateWithoutCursoInput>
+  }
+
+  export type MatriculaCreateManyCursoInputEnvelope = {
+    data: MatriculaCreateManyCursoInput | MatriculaCreateManyCursoInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type MatriculaUpsertWithWhereUniqueWithoutCursoInput = {
+    where: MatriculaWhereUniqueInput
+    update: XOR<MatriculaUpdateWithoutCursoInput, MatriculaUncheckedUpdateWithoutCursoInput>
+    create: XOR<MatriculaCreateWithoutCursoInput, MatriculaUncheckedCreateWithoutCursoInput>
+  }
+
+  export type MatriculaUpdateWithWhereUniqueWithoutCursoInput = {
+    where: MatriculaWhereUniqueInput
+    data: XOR<MatriculaUpdateWithoutCursoInput, MatriculaUncheckedUpdateWithoutCursoInput>
+  }
+
+  export type MatriculaUpdateManyWithWhereWithoutCursoInput = {
+    where: MatriculaScalarWhereInput
+    data: XOR<MatriculaUpdateManyMutationInput, MatriculaUncheckedUpdateManyWithoutCursoInput>
+  }
+
+  export type AlunoCreateWithoutMatriculasInput = {
+    id?: string
+    nome: string
+    email: string
+    dataNascimento?: Date | string | null
+    formado?: boolean
+    rg?: number | null
+    dataCriacao?: Date | string
+    dataAtualizacao?: Date | string
+    endereco?: EnderecoCreateNestedOneWithoutAlunoInput
+    avaliacoes?: AvaliacaoCreateNestedManyWithoutAlunoInput
+  }
+
+  export type AlunoUncheckedCreateWithoutMatriculasInput = {
+    id?: string
+    nome: string
+    email: string
+    dataNascimento?: Date | string | null
+    formado?: boolean
+    rg?: number | null
+    dataCriacao?: Date | string
+    dataAtualizacao?: Date | string
+    endereco?: EnderecoUncheckedCreateNestedOneWithoutAlunoInput
+    avaliacoes?: AvaliacaoUncheckedCreateNestedManyWithoutAlunoInput
+  }
+
+  export type AlunoCreateOrConnectWithoutMatriculasInput = {
+    where: AlunoWhereUniqueInput
+    create: XOR<AlunoCreateWithoutMatriculasInput, AlunoUncheckedCreateWithoutMatriculasInput>
+  }
+
+  export type CursoCreateWithoutMatriculasInput = {
+    id?: string
+    titulo: string
+    ementa: string
+    cargaHoraria: Decimal | DecimalJsLike | number | string
+    maxAlunos?: number
+    status: string
+    dataCriacao?: Date | string
+    dataAtualizacao?: Date | string
+  }
+
+  export type CursoUncheckedCreateWithoutMatriculasInput = {
+    id?: string
+    titulo: string
+    ementa: string
+    cargaHoraria: Decimal | DecimalJsLike | number | string
+    maxAlunos?: number
+    status: string
+    dataCriacao?: Date | string
+    dataAtualizacao?: Date | string
+  }
+
+  export type CursoCreateOrConnectWithoutMatriculasInput = {
+    where: CursoWhereUniqueInput
+    create: XOR<CursoCreateWithoutMatriculasInput, CursoUncheckedCreateWithoutMatriculasInput>
+  }
+
+  export type AlunoUpsertWithoutMatriculasInput = {
+    update: XOR<AlunoUpdateWithoutMatriculasInput, AlunoUncheckedUpdateWithoutMatriculasInput>
+    create: XOR<AlunoCreateWithoutMatriculasInput, AlunoUncheckedCreateWithoutMatriculasInput>
+    where?: AlunoWhereInput
+  }
+
+  export type AlunoUpdateToOneWithWhereWithoutMatriculasInput = {
+    where?: AlunoWhereInput
+    data: XOR<AlunoUpdateWithoutMatriculasInput, AlunoUncheckedUpdateWithoutMatriculasInput>
+  }
+
+  export type AlunoUpdateWithoutMatriculasInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    nome?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    dataNascimento?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    formado?: BoolFieldUpdateOperationsInput | boolean
+    rg?: NullableIntFieldUpdateOperationsInput | number | null
+    dataCriacao?: DateTimeFieldUpdateOperationsInput | Date | string
+    dataAtualizacao?: DateTimeFieldUpdateOperationsInput | Date | string
+    endereco?: EnderecoUpdateOneWithoutAlunoNestedInput
+    avaliacoes?: AvaliacaoUpdateManyWithoutAlunoNestedInput
+  }
+
+  export type AlunoUncheckedUpdateWithoutMatriculasInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    nome?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    dataNascimento?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    formado?: BoolFieldUpdateOperationsInput | boolean
+    rg?: NullableIntFieldUpdateOperationsInput | number | null
+    dataCriacao?: DateTimeFieldUpdateOperationsInput | Date | string
+    dataAtualizacao?: DateTimeFieldUpdateOperationsInput | Date | string
+    endereco?: EnderecoUncheckedUpdateOneWithoutAlunoNestedInput
+    avaliacoes?: AvaliacaoUncheckedUpdateManyWithoutAlunoNestedInput
+  }
+
+  export type CursoUpsertWithoutMatriculasInput = {
+    update: XOR<CursoUpdateWithoutMatriculasInput, CursoUncheckedUpdateWithoutMatriculasInput>
+    create: XOR<CursoCreateWithoutMatriculasInput, CursoUncheckedCreateWithoutMatriculasInput>
+    where?: CursoWhereInput
+  }
+
+  export type CursoUpdateToOneWithWhereWithoutMatriculasInput = {
+    where?: CursoWhereInput
+    data: XOR<CursoUpdateWithoutMatriculasInput, CursoUncheckedUpdateWithoutMatriculasInput>
+  }
+
+  export type CursoUpdateWithoutMatriculasInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    titulo?: StringFieldUpdateOperationsInput | string
+    ementa?: StringFieldUpdateOperationsInput | string
+    cargaHoraria?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    maxAlunos?: IntFieldUpdateOperationsInput | number
+    status?: StringFieldUpdateOperationsInput | string
+    dataCriacao?: DateTimeFieldUpdateOperationsInput | Date | string
+    dataAtualizacao?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type CursoUncheckedUpdateWithoutMatriculasInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    titulo?: StringFieldUpdateOperationsInput | string
+    ementa?: StringFieldUpdateOperationsInput | string
+    cargaHoraria?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    maxAlunos?: IntFieldUpdateOperationsInput | number
+    status?: StringFieldUpdateOperationsInput | string
+    dataCriacao?: DateTimeFieldUpdateOperationsInput | Date | string
+    dataAtualizacao?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type AvaliacaoCreateManyAlunoInput = {
@@ -8575,6 +10328,11 @@ export namespace Prisma {
     disciplina: string
     nota: number
     dtAvaliacao?: Date | string
+  }
+
+  export type MatriculaCreateManyAlunoInput = {
+    idCurso: string
+    dtMatricula?: Date | string
   }
 
   export type AvaliacaoUpdateWithoutAlunoInput = {
@@ -8596,6 +10354,41 @@ export namespace Prisma {
     disciplina?: StringFieldUpdateOperationsInput | string
     nota?: IntFieldUpdateOperationsInput | number
     dtAvaliacao?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type MatriculaUpdateWithoutAlunoInput = {
+    dtMatricula?: DateTimeFieldUpdateOperationsInput | Date | string
+    curso?: CursoUpdateOneRequiredWithoutMatriculasNestedInput
+  }
+
+  export type MatriculaUncheckedUpdateWithoutAlunoInput = {
+    idCurso?: StringFieldUpdateOperationsInput | string
+    dtMatricula?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type MatriculaUncheckedUpdateManyWithoutAlunoInput = {
+    idCurso?: StringFieldUpdateOperationsInput | string
+    dtMatricula?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type MatriculaCreateManyCursoInput = {
+    idAluno: string
+    dtMatricula?: Date | string
+  }
+
+  export type MatriculaUpdateWithoutCursoInput = {
+    dtMatricula?: DateTimeFieldUpdateOperationsInput | Date | string
+    aluno?: AlunoUpdateOneRequiredWithoutMatriculasNestedInput
+  }
+
+  export type MatriculaUncheckedUpdateWithoutCursoInput = {
+    idAluno?: StringFieldUpdateOperationsInput | string
+    dtMatricula?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type MatriculaUncheckedUpdateManyWithoutCursoInput = {
+    idAluno?: StringFieldUpdateOperationsInput | string
+    dtMatricula?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
 

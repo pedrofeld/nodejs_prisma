@@ -28,6 +28,7 @@ model Aluno {
 
   endereco   Endereco?
   avaliacoes Avaliacao[] // lista de avaliações (porque pode ser mais de 1), por isso o colchetes
+  matriculas Matricula[] // lista de matrículas, relação N:N com Curso
 
   @@map("aluno") // 2x @ indica o nome da tabela no banco de dados
 }
@@ -70,7 +71,23 @@ model Curso {
   dataCriacao     DateTime @default(now()) @map("data_criacao")
   dataAtualizacao DateTime @updatedAt @map("data_atualizacao")
 
+  matriculas Matricula[] // lista de matrículas, relação N:N com Aluno
+
   @@map("curso")
+}
+
+// Aluno pode se matricular em vários cursos, Curso pode ter vários alunos
+model Matricula {
+  idAluno String @map("id_aluno")
+  idCurso String @map("id_curso")
+
+  dtMatricula DateTime @default(now()) @map("data_matricula")
+
+  aluno Aluno @relation(fields: [idAluno], references: [id])
+  curso Curso @relation(fields: [idCurso], references: [id])
+
+  @@id([idAluno, idCurso]) // chave primária composta
+  @@map("matricula")
 }
 
 model Material {
