@@ -131,6 +131,15 @@ exports.Prisma.AlunoScalarFieldEnum = {
   dataAtualizacao: 'dataAtualizacao'
 };
 
+exports.Prisma.EnderecoScalarFieldEnum = {
+  id: 'id',
+  rua: 'rua',
+  bairro: 'bairro',
+  numero: 'numero',
+  cidade: 'cidade',
+  idAluno: 'idAluno'
+};
+
 exports.Prisma.CursoScalarFieldEnum = {
   id: 'id',
   titulo: 'titulo',
@@ -170,6 +179,7 @@ exports.Prisma.NullsOrder = {
 
 exports.Prisma.ModelName = {
   Aluno: 'Aluno',
+  Endereco: 'Endereco',
   Curso: 'Curso',
   Material: 'Material'
 };

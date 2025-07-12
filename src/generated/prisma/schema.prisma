@@ -26,7 +26,22 @@ model Aluno {
   dataCriacao     DateTime @default(now()) @map("data_criacao") // @default(now()) define o valor padrão como a data atual
   dataAtualizacao DateTime @updatedAt @map("data_atualizacao") // @updatedAt atualiza automaticamente
 
+  endereco Endereco?
+
   @@map("aluno") // 2x @ indica o nome da tabela no banco de dados
+}
+
+// Aluno possui 1 endereço, Endereço pertence a 1 Aluno
+
+model Endereco {
+  id     String @id
+  rua    String @db.VarChar(30)
+  bairro String @db.VarChar(30)
+  numero Int
+  cidade String @db.VarChar(50)
+
+  idAluno String @unique
+  aluno   Aluno  @relation(fields: [idAluno], references: [id])
 }
 
 model Curso {
