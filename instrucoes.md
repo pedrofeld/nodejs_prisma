@@ -3,7 +3,7 @@ Configuração do projeto:
 - criar pasta para o projeto na biblioteca da sua máquina
 - vincular vscode à pasta
 - sem criar arquivos, rodar comando "npm init -y" no terminal
-- instalar dependências com o comando "npm i -D typescript td-node-dev"
+- instalar dependências com o comando "npm i -D typescript ts-node-dev"
 - criar arquivo tsconfig.json com o comando "npx tsc --init"
 - entrar no arquivo tsconfig.json e mudar o target (linha 14) para a versão mais atual
 - no tsconfig.json, descomentar linha 29 do rootDir e colocar o caminho "./src"
