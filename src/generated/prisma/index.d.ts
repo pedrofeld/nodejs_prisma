@@ -24,6 +24,11 @@ export type Aluno = $Result.DefaultSelection<Prisma.$AlunoPayload>
  */
 export type Endereco = $Result.DefaultSelection<Prisma.$EnderecoPayload>
 /**
+ * Model Avaliacao
+ * 
+ */
+export type Avaliacao = $Result.DefaultSelection<Prisma.$AvaliacaoPayload>
+/**
  * Model Curso
  * 
  */
@@ -178,6 +183,16 @@ export class PrismaClient<
     * ```
     */
   get endereco(): Prisma.EnderecoDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.avaliacao`: Exposes CRUD operations for the **Avaliacao** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more Avaliacaos
+    * const avaliacaos = await prisma.avaliacao.findMany()
+    * ```
+    */
+  get avaliacao(): Prisma.AvaliacaoDelegate<ExtArgs, ClientOptions>;
 
   /**
    * `prisma.curso`: Exposes CRUD operations for the **Curso** model.
@@ -640,6 +655,7 @@ export namespace Prisma {
   export const ModelName: {
     Aluno: 'Aluno',
     Endereco: 'Endereco',
+    Avaliacao: 'Avaliacao',
     Curso: 'Curso',
     Material: 'Material'
   };
@@ -660,7 +676,7 @@ export namespace Prisma {
       omit: GlobalOmitOptions
     }
     meta: {
-      modelProps: "aluno" | "endereco" | "curso" | "material"
+      modelProps: "aluno" | "endereco" | "avaliacao" | "curso" | "material"
       txIsolationLevel: Prisma.TransactionIsolationLevel
     }
     model: {
@@ -809,6 +825,80 @@ export namespace Prisma {
           count: {
             args: Prisma.EnderecoCountArgs<ExtArgs>
             result: $Utils.Optional<EnderecoCountAggregateOutputType> | number
+          }
+        }
+      }
+      Avaliacao: {
+        payload: Prisma.$AvaliacaoPayload<ExtArgs>
+        fields: Prisma.AvaliacaoFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.AvaliacaoFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AvaliacaoPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.AvaliacaoFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AvaliacaoPayload>
+          }
+          findFirst: {
+            args: Prisma.AvaliacaoFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AvaliacaoPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.AvaliacaoFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AvaliacaoPayload>
+          }
+          findMany: {
+            args: Prisma.AvaliacaoFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AvaliacaoPayload>[]
+          }
+          create: {
+            args: Prisma.AvaliacaoCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AvaliacaoPayload>
+          }
+          createMany: {
+            args: Prisma.AvaliacaoCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.AvaliacaoCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AvaliacaoPayload>[]
+          }
+          delete: {
+            args: Prisma.AvaliacaoDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AvaliacaoPayload>
+          }
+          update: {
+            args: Prisma.AvaliacaoUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AvaliacaoPayload>
+          }
+          deleteMany: {
+            args: Prisma.AvaliacaoDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.AvaliacaoUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.AvaliacaoUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AvaliacaoPayload>[]
+          }
+          upsert: {
+            args: Prisma.AvaliacaoUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AvaliacaoPayload>
+          }
+          aggregate: {
+            args: Prisma.AvaliacaoAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateAvaliacao>
+          }
+          groupBy: {
+            args: Prisma.AvaliacaoGroupByArgs<ExtArgs>
+            result: $Utils.Optional<AvaliacaoGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.AvaliacaoCountArgs<ExtArgs>
+            result: $Utils.Optional<AvaliacaoCountAggregateOutputType> | number
           }
         }
       }
@@ -1046,6 +1136,7 @@ export namespace Prisma {
   export type GlobalOmitConfig = {
     aluno?: AlunoOmit
     endereco?: EnderecoOmit
+    avaliacao?: AvaliacaoOmit
     curso?: CursoOmit
     material?: MaterialOmit
   }
@@ -1136,6 +1227,36 @@ export namespace Prisma {
    * Count Types
    */
 
+
+  /**
+   * Count Type AlunoCountOutputType
+   */
+
+  export type AlunoCountOutputType = {
+    avaliacoes: number
+  }
+
+  export type AlunoCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    avaliacoes?: boolean | AlunoCountOutputTypeCountAvaliacoesArgs
+  }
+
+  // Custom InputTypes
+  /**
+   * AlunoCountOutputType without action
+   */
+  export type AlunoCountOutputTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the AlunoCountOutputType
+     */
+    select?: AlunoCountOutputTypeSelect<ExtArgs> | null
+  }
+
+  /**
+   * AlunoCountOutputType without action
+   */
+  export type AlunoCountOutputTypeCountAvaliacoesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: AvaliacaoWhereInput
+  }
 
 
   /**
@@ -1365,6 +1486,8 @@ export namespace Prisma {
     dataCriacao?: boolean
     dataAtualizacao?: boolean
     endereco?: boolean | Aluno$enderecoArgs<ExtArgs>
+    avaliacoes?: boolean | Aluno$avaliacoesArgs<ExtArgs>
+    _count?: boolean | AlunoCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["aluno"]>
 
   export type AlunoSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
@@ -1403,6 +1526,8 @@ export namespace Prisma {
   export type AlunoOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "nome" | "email" | "dataNascimento" | "formado" | "rg" | "dataCriacao" | "dataAtualizacao", ExtArgs["result"]["aluno"]>
   export type AlunoInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     endereco?: boolean | Aluno$enderecoArgs<ExtArgs>
+    avaliacoes?: boolean | Aluno$avaliacoesArgs<ExtArgs>
+    _count?: boolean | AlunoCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type AlunoIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
   export type AlunoIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
@@ -1411,6 +1536,7 @@ export namespace Prisma {
     name: "Aluno"
     objects: {
       endereco: Prisma.$EnderecoPayload<ExtArgs> | null
+      avaliacoes: Prisma.$AvaliacaoPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
@@ -1816,6 +1942,7 @@ export namespace Prisma {
   export interface Prisma__AlunoClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
     endereco<T extends Aluno$enderecoArgs<ExtArgs> = {}>(args?: Subset<T, Aluno$enderecoArgs<ExtArgs>>): Prisma__EnderecoClient<$Result.GetResult<Prisma.$EnderecoPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+    avaliacoes<T extends Aluno$avaliacoesArgs<ExtArgs> = {}>(args?: Subset<T, Aluno$avaliacoesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$AvaliacaoPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -2257,6 +2384,30 @@ export namespace Prisma {
      */
     include?: EnderecoInclude<ExtArgs> | null
     where?: EnderecoWhereInput
+  }
+
+  /**
+   * Aluno.avaliacoes
+   */
+  export type Aluno$avaliacoesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Avaliacao
+     */
+    select?: AvaliacaoSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Avaliacao
+     */
+    omit?: AvaliacaoOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AvaliacaoInclude<ExtArgs> | null
+    where?: AvaliacaoWhereInput
+    orderBy?: AvaliacaoOrderByWithRelationInput | AvaliacaoOrderByWithRelationInput[]
+    cursor?: AvaliacaoWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: AvaliacaoScalarFieldEnum | AvaliacaoScalarFieldEnum[]
   }
 
   /**
@@ -3380,6 +3531,1098 @@ export namespace Prisma {
      * Choose, which related nodes to fetch as well
      */
     include?: EnderecoInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model Avaliacao
+   */
+
+  export type AggregateAvaliacao = {
+    _count: AvaliacaoCountAggregateOutputType | null
+    _avg: AvaliacaoAvgAggregateOutputType | null
+    _sum: AvaliacaoSumAggregateOutputType | null
+    _min: AvaliacaoMinAggregateOutputType | null
+    _max: AvaliacaoMaxAggregateOutputType | null
+  }
+
+  export type AvaliacaoAvgAggregateOutputType = {
+    nota: number | null
+  }
+
+  export type AvaliacaoSumAggregateOutputType = {
+    nota: number | null
+  }
+
+  export type AvaliacaoMinAggregateOutputType = {
+    id: string | null
+    disciplina: string | null
+    nota: number | null
+    dtAvaliacao: Date | null
+    idAluno: string | null
+  }
+
+  export type AvaliacaoMaxAggregateOutputType = {
+    id: string | null
+    disciplina: string | null
+    nota: number | null
+    dtAvaliacao: Date | null
+    idAluno: string | null
+  }
+
+  export type AvaliacaoCountAggregateOutputType = {
+    id: number
+    disciplina: number
+    nota: number
+    dtAvaliacao: number
+    idAluno: number
+    _all: number
+  }
+
+
+  export type AvaliacaoAvgAggregateInputType = {
+    nota?: true
+  }
+
+  export type AvaliacaoSumAggregateInputType = {
+    nota?: true
+  }
+
+  export type AvaliacaoMinAggregateInputType = {
+    id?: true
+    disciplina?: true
+    nota?: true
+    dtAvaliacao?: true
+    idAluno?: true
+  }
+
+  export type AvaliacaoMaxAggregateInputType = {
+    id?: true
+    disciplina?: true
+    nota?: true
+    dtAvaliacao?: true
+    idAluno?: true
+  }
+
+  export type AvaliacaoCountAggregateInputType = {
+    id?: true
+    disciplina?: true
+    nota?: true
+    dtAvaliacao?: true
+    idAluno?: true
+    _all?: true
+  }
+
+  export type AvaliacaoAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which Avaliacao to aggregate.
+     */
+    where?: AvaliacaoWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Avaliacaos to fetch.
+     */
+    orderBy?: AvaliacaoOrderByWithRelationInput | AvaliacaoOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: AvaliacaoWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Avaliacaos from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Avaliacaos.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned Avaliacaos
+    **/
+    _count?: true | AvaliacaoCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: AvaliacaoAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: AvaliacaoSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: AvaliacaoMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: AvaliacaoMaxAggregateInputType
+  }
+
+  export type GetAvaliacaoAggregateType<T extends AvaliacaoAggregateArgs> = {
+        [P in keyof T & keyof AggregateAvaliacao]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateAvaliacao[P]>
+      : GetScalarType<T[P], AggregateAvaliacao[P]>
+  }
+
+
+
+
+  export type AvaliacaoGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: AvaliacaoWhereInput
+    orderBy?: AvaliacaoOrderByWithAggregationInput | AvaliacaoOrderByWithAggregationInput[]
+    by: AvaliacaoScalarFieldEnum[] | AvaliacaoScalarFieldEnum
+    having?: AvaliacaoScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: AvaliacaoCountAggregateInputType | true
+    _avg?: AvaliacaoAvgAggregateInputType
+    _sum?: AvaliacaoSumAggregateInputType
+    _min?: AvaliacaoMinAggregateInputType
+    _max?: AvaliacaoMaxAggregateInputType
+  }
+
+  export type AvaliacaoGroupByOutputType = {
+    id: string
+    disciplina: string
+    nota: number
+    dtAvaliacao: Date
+    idAluno: string
+    _count: AvaliacaoCountAggregateOutputType | null
+    _avg: AvaliacaoAvgAggregateOutputType | null
+    _sum: AvaliacaoSumAggregateOutputType | null
+    _min: AvaliacaoMinAggregateOutputType | null
+    _max: AvaliacaoMaxAggregateOutputType | null
+  }
+
+  type GetAvaliacaoGroupByPayload<T extends AvaliacaoGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<AvaliacaoGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof AvaliacaoGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], AvaliacaoGroupByOutputType[P]>
+            : GetScalarType<T[P], AvaliacaoGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type AvaliacaoSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    disciplina?: boolean
+    nota?: boolean
+    dtAvaliacao?: boolean
+    idAluno?: boolean
+    aluno?: boolean | AlunoDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["avaliacao"]>
+
+  export type AvaliacaoSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    disciplina?: boolean
+    nota?: boolean
+    dtAvaliacao?: boolean
+    idAluno?: boolean
+    aluno?: boolean | AlunoDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["avaliacao"]>
+
+  export type AvaliacaoSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    disciplina?: boolean
+    nota?: boolean
+    dtAvaliacao?: boolean
+    idAluno?: boolean
+    aluno?: boolean | AlunoDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["avaliacao"]>
+
+  export type AvaliacaoSelectScalar = {
+    id?: boolean
+    disciplina?: boolean
+    nota?: boolean
+    dtAvaliacao?: boolean
+    idAluno?: boolean
+  }
+
+  export type AvaliacaoOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "disciplina" | "nota" | "dtAvaliacao" | "idAluno", ExtArgs["result"]["avaliacao"]>
+  export type AvaliacaoInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    aluno?: boolean | AlunoDefaultArgs<ExtArgs>
+  }
+  export type AvaliacaoIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    aluno?: boolean | AlunoDefaultArgs<ExtArgs>
+  }
+  export type AvaliacaoIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    aluno?: boolean | AlunoDefaultArgs<ExtArgs>
+  }
+
+  export type $AvaliacaoPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "Avaliacao"
+    objects: {
+      aluno: Prisma.$AlunoPayload<ExtArgs>
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      disciplina: string
+      nota: number
+      dtAvaliacao: Date
+      idAluno: string
+    }, ExtArgs["result"]["avaliacao"]>
+    composites: {}
+  }
+
+  type AvaliacaoGetPayload<S extends boolean | null | undefined | AvaliacaoDefaultArgs> = $Result.GetResult<Prisma.$AvaliacaoPayload, S>
+
+  type AvaliacaoCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<AvaliacaoFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: AvaliacaoCountAggregateInputType | true
+    }
+
+  export interface AvaliacaoDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['Avaliacao'], meta: { name: 'Avaliacao' } }
+    /**
+     * Find zero or one Avaliacao that matches the filter.
+     * @param {AvaliacaoFindUniqueArgs} args - Arguments to find a Avaliacao
+     * @example
+     * // Get one Avaliacao
+     * const avaliacao = await prisma.avaliacao.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends AvaliacaoFindUniqueArgs>(args: SelectSubset<T, AvaliacaoFindUniqueArgs<ExtArgs>>): Prisma__AvaliacaoClient<$Result.GetResult<Prisma.$AvaliacaoPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one Avaliacao that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {AvaliacaoFindUniqueOrThrowArgs} args - Arguments to find a Avaliacao
+     * @example
+     * // Get one Avaliacao
+     * const avaliacao = await prisma.avaliacao.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends AvaliacaoFindUniqueOrThrowArgs>(args: SelectSubset<T, AvaliacaoFindUniqueOrThrowArgs<ExtArgs>>): Prisma__AvaliacaoClient<$Result.GetResult<Prisma.$AvaliacaoPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first Avaliacao that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {AvaliacaoFindFirstArgs} args - Arguments to find a Avaliacao
+     * @example
+     * // Get one Avaliacao
+     * const avaliacao = await prisma.avaliacao.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends AvaliacaoFindFirstArgs>(args?: SelectSubset<T, AvaliacaoFindFirstArgs<ExtArgs>>): Prisma__AvaliacaoClient<$Result.GetResult<Prisma.$AvaliacaoPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first Avaliacao that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {AvaliacaoFindFirstOrThrowArgs} args - Arguments to find a Avaliacao
+     * @example
+     * // Get one Avaliacao
+     * const avaliacao = await prisma.avaliacao.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends AvaliacaoFindFirstOrThrowArgs>(args?: SelectSubset<T, AvaliacaoFindFirstOrThrowArgs<ExtArgs>>): Prisma__AvaliacaoClient<$Result.GetResult<Prisma.$AvaliacaoPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more Avaliacaos that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {AvaliacaoFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all Avaliacaos
+     * const avaliacaos = await prisma.avaliacao.findMany()
+     * 
+     * // Get first 10 Avaliacaos
+     * const avaliacaos = await prisma.avaliacao.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const avaliacaoWithIdOnly = await prisma.avaliacao.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends AvaliacaoFindManyArgs>(args?: SelectSubset<T, AvaliacaoFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$AvaliacaoPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a Avaliacao.
+     * @param {AvaliacaoCreateArgs} args - Arguments to create a Avaliacao.
+     * @example
+     * // Create one Avaliacao
+     * const Avaliacao = await prisma.avaliacao.create({
+     *   data: {
+     *     // ... data to create a Avaliacao
+     *   }
+     * })
+     * 
+     */
+    create<T extends AvaliacaoCreateArgs>(args: SelectSubset<T, AvaliacaoCreateArgs<ExtArgs>>): Prisma__AvaliacaoClient<$Result.GetResult<Prisma.$AvaliacaoPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many Avaliacaos.
+     * @param {AvaliacaoCreateManyArgs} args - Arguments to create many Avaliacaos.
+     * @example
+     * // Create many Avaliacaos
+     * const avaliacao = await prisma.avaliacao.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends AvaliacaoCreateManyArgs>(args?: SelectSubset<T, AvaliacaoCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many Avaliacaos and returns the data saved in the database.
+     * @param {AvaliacaoCreateManyAndReturnArgs} args - Arguments to create many Avaliacaos.
+     * @example
+     * // Create many Avaliacaos
+     * const avaliacao = await prisma.avaliacao.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many Avaliacaos and only return the `id`
+     * const avaliacaoWithIdOnly = await prisma.avaliacao.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends AvaliacaoCreateManyAndReturnArgs>(args?: SelectSubset<T, AvaliacaoCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$AvaliacaoPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a Avaliacao.
+     * @param {AvaliacaoDeleteArgs} args - Arguments to delete one Avaliacao.
+     * @example
+     * // Delete one Avaliacao
+     * const Avaliacao = await prisma.avaliacao.delete({
+     *   where: {
+     *     // ... filter to delete one Avaliacao
+     *   }
+     * })
+     * 
+     */
+    delete<T extends AvaliacaoDeleteArgs>(args: SelectSubset<T, AvaliacaoDeleteArgs<ExtArgs>>): Prisma__AvaliacaoClient<$Result.GetResult<Prisma.$AvaliacaoPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one Avaliacao.
+     * @param {AvaliacaoUpdateArgs} args - Arguments to update one Avaliacao.
+     * @example
+     * // Update one Avaliacao
+     * const avaliacao = await prisma.avaliacao.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends AvaliacaoUpdateArgs>(args: SelectSubset<T, AvaliacaoUpdateArgs<ExtArgs>>): Prisma__AvaliacaoClient<$Result.GetResult<Prisma.$AvaliacaoPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more Avaliacaos.
+     * @param {AvaliacaoDeleteManyArgs} args - Arguments to filter Avaliacaos to delete.
+     * @example
+     * // Delete a few Avaliacaos
+     * const { count } = await prisma.avaliacao.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends AvaliacaoDeleteManyArgs>(args?: SelectSubset<T, AvaliacaoDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Avaliacaos.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {AvaliacaoUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many Avaliacaos
+     * const avaliacao = await prisma.avaliacao.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends AvaliacaoUpdateManyArgs>(args: SelectSubset<T, AvaliacaoUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Avaliacaos and returns the data updated in the database.
+     * @param {AvaliacaoUpdateManyAndReturnArgs} args - Arguments to update many Avaliacaos.
+     * @example
+     * // Update many Avaliacaos
+     * const avaliacao = await prisma.avaliacao.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more Avaliacaos and only return the `id`
+     * const avaliacaoWithIdOnly = await prisma.avaliacao.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends AvaliacaoUpdateManyAndReturnArgs>(args: SelectSubset<T, AvaliacaoUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$AvaliacaoPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one Avaliacao.
+     * @param {AvaliacaoUpsertArgs} args - Arguments to update or create a Avaliacao.
+     * @example
+     * // Update or create a Avaliacao
+     * const avaliacao = await prisma.avaliacao.upsert({
+     *   create: {
+     *     // ... data to create a Avaliacao
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the Avaliacao we want to update
+     *   }
+     * })
+     */
+    upsert<T extends AvaliacaoUpsertArgs>(args: SelectSubset<T, AvaliacaoUpsertArgs<ExtArgs>>): Prisma__AvaliacaoClient<$Result.GetResult<Prisma.$AvaliacaoPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of Avaliacaos.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {AvaliacaoCountArgs} args - Arguments to filter Avaliacaos to count.
+     * @example
+     * // Count the number of Avaliacaos
+     * const count = await prisma.avaliacao.count({
+     *   where: {
+     *     // ... the filter for the Avaliacaos we want to count
+     *   }
+     * })
+    **/
+    count<T extends AvaliacaoCountArgs>(
+      args?: Subset<T, AvaliacaoCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], AvaliacaoCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a Avaliacao.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {AvaliacaoAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends AvaliacaoAggregateArgs>(args: Subset<T, AvaliacaoAggregateArgs>): Prisma.PrismaPromise<GetAvaliacaoAggregateType<T>>
+
+    /**
+     * Group by Avaliacao.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {AvaliacaoGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends AvaliacaoGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: AvaliacaoGroupByArgs['orderBy'] }
+        : { orderBy?: AvaliacaoGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, AvaliacaoGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetAvaliacaoGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the Avaliacao model
+   */
+  readonly fields: AvaliacaoFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for Avaliacao.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__AvaliacaoClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    aluno<T extends AlunoDefaultArgs<ExtArgs> = {}>(args?: Subset<T, AlunoDefaultArgs<ExtArgs>>): Prisma__AlunoClient<$Result.GetResult<Prisma.$AlunoPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the Avaliacao model
+   */
+  interface AvaliacaoFieldRefs {
+    readonly id: FieldRef<"Avaliacao", 'String'>
+    readonly disciplina: FieldRef<"Avaliacao", 'String'>
+    readonly nota: FieldRef<"Avaliacao", 'Int'>
+    readonly dtAvaliacao: FieldRef<"Avaliacao", 'DateTime'>
+    readonly idAluno: FieldRef<"Avaliacao", 'String'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * Avaliacao findUnique
+   */
+  export type AvaliacaoFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Avaliacao
+     */
+    select?: AvaliacaoSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Avaliacao
+     */
+    omit?: AvaliacaoOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AvaliacaoInclude<ExtArgs> | null
+    /**
+     * Filter, which Avaliacao to fetch.
+     */
+    where: AvaliacaoWhereUniqueInput
+  }
+
+  /**
+   * Avaliacao findUniqueOrThrow
+   */
+  export type AvaliacaoFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Avaliacao
+     */
+    select?: AvaliacaoSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Avaliacao
+     */
+    omit?: AvaliacaoOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AvaliacaoInclude<ExtArgs> | null
+    /**
+     * Filter, which Avaliacao to fetch.
+     */
+    where: AvaliacaoWhereUniqueInput
+  }
+
+  /**
+   * Avaliacao findFirst
+   */
+  export type AvaliacaoFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Avaliacao
+     */
+    select?: AvaliacaoSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Avaliacao
+     */
+    omit?: AvaliacaoOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AvaliacaoInclude<ExtArgs> | null
+    /**
+     * Filter, which Avaliacao to fetch.
+     */
+    where?: AvaliacaoWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Avaliacaos to fetch.
+     */
+    orderBy?: AvaliacaoOrderByWithRelationInput | AvaliacaoOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Avaliacaos.
+     */
+    cursor?: AvaliacaoWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Avaliacaos from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Avaliacaos.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Avaliacaos.
+     */
+    distinct?: AvaliacaoScalarFieldEnum | AvaliacaoScalarFieldEnum[]
+  }
+
+  /**
+   * Avaliacao findFirstOrThrow
+   */
+  export type AvaliacaoFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Avaliacao
+     */
+    select?: AvaliacaoSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Avaliacao
+     */
+    omit?: AvaliacaoOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AvaliacaoInclude<ExtArgs> | null
+    /**
+     * Filter, which Avaliacao to fetch.
+     */
+    where?: AvaliacaoWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Avaliacaos to fetch.
+     */
+    orderBy?: AvaliacaoOrderByWithRelationInput | AvaliacaoOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Avaliacaos.
+     */
+    cursor?: AvaliacaoWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Avaliacaos from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Avaliacaos.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Avaliacaos.
+     */
+    distinct?: AvaliacaoScalarFieldEnum | AvaliacaoScalarFieldEnum[]
+  }
+
+  /**
+   * Avaliacao findMany
+   */
+  export type AvaliacaoFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Avaliacao
+     */
+    select?: AvaliacaoSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Avaliacao
+     */
+    omit?: AvaliacaoOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AvaliacaoInclude<ExtArgs> | null
+    /**
+     * Filter, which Avaliacaos to fetch.
+     */
+    where?: AvaliacaoWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Avaliacaos to fetch.
+     */
+    orderBy?: AvaliacaoOrderByWithRelationInput | AvaliacaoOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing Avaliacaos.
+     */
+    cursor?: AvaliacaoWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Avaliacaos from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Avaliacaos.
+     */
+    skip?: number
+    distinct?: AvaliacaoScalarFieldEnum | AvaliacaoScalarFieldEnum[]
+  }
+
+  /**
+   * Avaliacao create
+   */
+  export type AvaliacaoCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Avaliacao
+     */
+    select?: AvaliacaoSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Avaliacao
+     */
+    omit?: AvaliacaoOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AvaliacaoInclude<ExtArgs> | null
+    /**
+     * The data needed to create a Avaliacao.
+     */
+    data: XOR<AvaliacaoCreateInput, AvaliacaoUncheckedCreateInput>
+  }
+
+  /**
+   * Avaliacao createMany
+   */
+  export type AvaliacaoCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many Avaliacaos.
+     */
+    data: AvaliacaoCreateManyInput | AvaliacaoCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * Avaliacao createManyAndReturn
+   */
+  export type AvaliacaoCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Avaliacao
+     */
+    select?: AvaliacaoSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the Avaliacao
+     */
+    omit?: AvaliacaoOmit<ExtArgs> | null
+    /**
+     * The data used to create many Avaliacaos.
+     */
+    data: AvaliacaoCreateManyInput | AvaliacaoCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AvaliacaoIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * Avaliacao update
+   */
+  export type AvaliacaoUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Avaliacao
+     */
+    select?: AvaliacaoSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Avaliacao
+     */
+    omit?: AvaliacaoOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AvaliacaoInclude<ExtArgs> | null
+    /**
+     * The data needed to update a Avaliacao.
+     */
+    data: XOR<AvaliacaoUpdateInput, AvaliacaoUncheckedUpdateInput>
+    /**
+     * Choose, which Avaliacao to update.
+     */
+    where: AvaliacaoWhereUniqueInput
+  }
+
+  /**
+   * Avaliacao updateMany
+   */
+  export type AvaliacaoUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update Avaliacaos.
+     */
+    data: XOR<AvaliacaoUpdateManyMutationInput, AvaliacaoUncheckedUpdateManyInput>
+    /**
+     * Filter which Avaliacaos to update
+     */
+    where?: AvaliacaoWhereInput
+    /**
+     * Limit how many Avaliacaos to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * Avaliacao updateManyAndReturn
+   */
+  export type AvaliacaoUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Avaliacao
+     */
+    select?: AvaliacaoSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the Avaliacao
+     */
+    omit?: AvaliacaoOmit<ExtArgs> | null
+    /**
+     * The data used to update Avaliacaos.
+     */
+    data: XOR<AvaliacaoUpdateManyMutationInput, AvaliacaoUncheckedUpdateManyInput>
+    /**
+     * Filter which Avaliacaos to update
+     */
+    where?: AvaliacaoWhereInput
+    /**
+     * Limit how many Avaliacaos to update.
+     */
+    limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AvaliacaoIncludeUpdateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * Avaliacao upsert
+   */
+  export type AvaliacaoUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Avaliacao
+     */
+    select?: AvaliacaoSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Avaliacao
+     */
+    omit?: AvaliacaoOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AvaliacaoInclude<ExtArgs> | null
+    /**
+     * The filter to search for the Avaliacao to update in case it exists.
+     */
+    where: AvaliacaoWhereUniqueInput
+    /**
+     * In case the Avaliacao found by the `where` argument doesn't exist, create a new Avaliacao with this data.
+     */
+    create: XOR<AvaliacaoCreateInput, AvaliacaoUncheckedCreateInput>
+    /**
+     * In case the Avaliacao was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<AvaliacaoUpdateInput, AvaliacaoUncheckedUpdateInput>
+  }
+
+  /**
+   * Avaliacao delete
+   */
+  export type AvaliacaoDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Avaliacao
+     */
+    select?: AvaliacaoSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Avaliacao
+     */
+    omit?: AvaliacaoOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AvaliacaoInclude<ExtArgs> | null
+    /**
+     * Filter which Avaliacao to delete.
+     */
+    where: AvaliacaoWhereUniqueInput
+  }
+
+  /**
+   * Avaliacao deleteMany
+   */
+  export type AvaliacaoDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which Avaliacaos to delete
+     */
+    where?: AvaliacaoWhereInput
+    /**
+     * Limit how many Avaliacaos to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * Avaliacao without action
+   */
+  export type AvaliacaoDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Avaliacao
+     */
+    select?: AvaliacaoSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Avaliacao
+     */
+    omit?: AvaliacaoOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AvaliacaoInclude<ExtArgs> | null
   }
 
 
@@ -5550,6 +6793,17 @@ export namespace Prisma {
   export type EnderecoScalarFieldEnum = (typeof EnderecoScalarFieldEnum)[keyof typeof EnderecoScalarFieldEnum]
 
 
+  export const AvaliacaoScalarFieldEnum: {
+    id: 'id',
+    disciplina: 'disciplina',
+    nota: 'nota',
+    dtAvaliacao: 'dtAvaliacao',
+    idAluno: 'idAluno'
+  };
+
+  export type AvaliacaoScalarFieldEnum = (typeof AvaliacaoScalarFieldEnum)[keyof typeof AvaliacaoScalarFieldEnum]
+
+
   export const CursoScalarFieldEnum: {
     id: 'id',
     titulo: 'titulo',
@@ -5699,6 +6953,7 @@ export namespace Prisma {
     dataCriacao?: DateTimeFilter<"Aluno"> | Date | string
     dataAtualizacao?: DateTimeFilter<"Aluno"> | Date | string
     endereco?: XOR<EnderecoNullableScalarRelationFilter, EnderecoWhereInput> | null
+    avaliacoes?: AvaliacaoListRelationFilter
   }
 
   export type AlunoOrderByWithRelationInput = {
@@ -5711,6 +6966,7 @@ export namespace Prisma {
     dataCriacao?: SortOrder
     dataAtualizacao?: SortOrder
     endereco?: EnderecoOrderByWithRelationInput
+    avaliacoes?: AvaliacaoOrderByRelationAggregateInput
   }
 
   export type AlunoWhereUniqueInput = Prisma.AtLeast<{
@@ -5726,6 +6982,7 @@ export namespace Prisma {
     dataCriacao?: DateTimeFilter<"Aluno"> | Date | string
     dataAtualizacao?: DateTimeFilter<"Aluno"> | Date | string
     endereco?: XOR<EnderecoNullableScalarRelationFilter, EnderecoWhereInput> | null
+    avaliacoes?: AvaliacaoListRelationFilter
   }, "id" | "email">
 
   export type AlunoOrderByWithAggregationInput = {
@@ -5818,6 +7075,63 @@ export namespace Prisma {
     numero?: IntWithAggregatesFilter<"Endereco"> | number
     cidade?: StringWithAggregatesFilter<"Endereco"> | string
     idAluno?: StringWithAggregatesFilter<"Endereco"> | string
+  }
+
+  export type AvaliacaoWhereInput = {
+    AND?: AvaliacaoWhereInput | AvaliacaoWhereInput[]
+    OR?: AvaliacaoWhereInput[]
+    NOT?: AvaliacaoWhereInput | AvaliacaoWhereInput[]
+    id?: StringFilter<"Avaliacao"> | string
+    disciplina?: StringFilter<"Avaliacao"> | string
+    nota?: IntFilter<"Avaliacao"> | number
+    dtAvaliacao?: DateTimeFilter<"Avaliacao"> | Date | string
+    idAluno?: StringFilter<"Avaliacao"> | string
+    aluno?: XOR<AlunoScalarRelationFilter, AlunoWhereInput>
+  }
+
+  export type AvaliacaoOrderByWithRelationInput = {
+    id?: SortOrder
+    disciplina?: SortOrder
+    nota?: SortOrder
+    dtAvaliacao?: SortOrder
+    idAluno?: SortOrder
+    aluno?: AlunoOrderByWithRelationInput
+  }
+
+  export type AvaliacaoWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    AND?: AvaliacaoWhereInput | AvaliacaoWhereInput[]
+    OR?: AvaliacaoWhereInput[]
+    NOT?: AvaliacaoWhereInput | AvaliacaoWhereInput[]
+    disciplina?: StringFilter<"Avaliacao"> | string
+    nota?: IntFilter<"Avaliacao"> | number
+    dtAvaliacao?: DateTimeFilter<"Avaliacao"> | Date | string
+    idAluno?: StringFilter<"Avaliacao"> | string
+    aluno?: XOR<AlunoScalarRelationFilter, AlunoWhereInput>
+  }, "id">
+
+  export type AvaliacaoOrderByWithAggregationInput = {
+    id?: SortOrder
+    disciplina?: SortOrder
+    nota?: SortOrder
+    dtAvaliacao?: SortOrder
+    idAluno?: SortOrder
+    _count?: AvaliacaoCountOrderByAggregateInput
+    _avg?: AvaliacaoAvgOrderByAggregateInput
+    _max?: AvaliacaoMaxOrderByAggregateInput
+    _min?: AvaliacaoMinOrderByAggregateInput
+    _sum?: AvaliacaoSumOrderByAggregateInput
+  }
+
+  export type AvaliacaoScalarWhereWithAggregatesInput = {
+    AND?: AvaliacaoScalarWhereWithAggregatesInput | AvaliacaoScalarWhereWithAggregatesInput[]
+    OR?: AvaliacaoScalarWhereWithAggregatesInput[]
+    NOT?: AvaliacaoScalarWhereWithAggregatesInput | AvaliacaoScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"Avaliacao"> | string
+    disciplina?: StringWithAggregatesFilter<"Avaliacao"> | string
+    nota?: IntWithAggregatesFilter<"Avaliacao"> | number
+    dtAvaliacao?: DateTimeWithAggregatesFilter<"Avaliacao"> | Date | string
+    idAluno?: StringWithAggregatesFilter<"Avaliacao"> | string
   }
 
   export type CursoWhereInput = {
@@ -5963,6 +7277,7 @@ export namespace Prisma {
     dataCriacao?: Date | string
     dataAtualizacao?: Date | string
     endereco?: EnderecoCreateNestedOneWithoutAlunoInput
+    avaliacoes?: AvaliacaoCreateNestedManyWithoutAlunoInput
   }
 
   export type AlunoUncheckedCreateInput = {
@@ -5975,6 +7290,7 @@ export namespace Prisma {
     dataCriacao?: Date | string
     dataAtualizacao?: Date | string
     endereco?: EnderecoUncheckedCreateNestedOneWithoutAlunoInput
+    avaliacoes?: AvaliacaoUncheckedCreateNestedManyWithoutAlunoInput
   }
 
   export type AlunoUpdateInput = {
@@ -5987,6 +7303,7 @@ export namespace Prisma {
     dataCriacao?: DateTimeFieldUpdateOperationsInput | Date | string
     dataAtualizacao?: DateTimeFieldUpdateOperationsInput | Date | string
     endereco?: EnderecoUpdateOneWithoutAlunoNestedInput
+    avaliacoes?: AvaliacaoUpdateManyWithoutAlunoNestedInput
   }
 
   export type AlunoUncheckedUpdateInput = {
@@ -5999,6 +7316,7 @@ export namespace Prisma {
     dataCriacao?: DateTimeFieldUpdateOperationsInput | Date | string
     dataAtualizacao?: DateTimeFieldUpdateOperationsInput | Date | string
     endereco?: EnderecoUncheckedUpdateOneWithoutAlunoNestedInput
+    avaliacoes?: AvaliacaoUncheckedUpdateManyWithoutAlunoNestedInput
   }
 
   export type AlunoCreateManyInput = {
@@ -6093,6 +7411,61 @@ export namespace Prisma {
     bairro?: StringFieldUpdateOperationsInput | string
     numero?: IntFieldUpdateOperationsInput | number
     cidade?: StringFieldUpdateOperationsInput | string
+    idAluno?: StringFieldUpdateOperationsInput | string
+  }
+
+  export type AvaliacaoCreateInput = {
+    id?: string
+    disciplina: string
+    nota: number
+    dtAvaliacao?: Date | string
+    aluno: AlunoCreateNestedOneWithoutAvaliacoesInput
+  }
+
+  export type AvaliacaoUncheckedCreateInput = {
+    id?: string
+    disciplina: string
+    nota: number
+    dtAvaliacao?: Date | string
+    idAluno: string
+  }
+
+  export type AvaliacaoUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    disciplina?: StringFieldUpdateOperationsInput | string
+    nota?: IntFieldUpdateOperationsInput | number
+    dtAvaliacao?: DateTimeFieldUpdateOperationsInput | Date | string
+    aluno?: AlunoUpdateOneRequiredWithoutAvaliacoesNestedInput
+  }
+
+  export type AvaliacaoUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    disciplina?: StringFieldUpdateOperationsInput | string
+    nota?: IntFieldUpdateOperationsInput | number
+    dtAvaliacao?: DateTimeFieldUpdateOperationsInput | Date | string
+    idAluno?: StringFieldUpdateOperationsInput | string
+  }
+
+  export type AvaliacaoCreateManyInput = {
+    id?: string
+    disciplina: string
+    nota: number
+    dtAvaliacao?: Date | string
+    idAluno: string
+  }
+
+  export type AvaliacaoUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    disciplina?: StringFieldUpdateOperationsInput | string
+    nota?: IntFieldUpdateOperationsInput | number
+    dtAvaliacao?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type AvaliacaoUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    disciplina?: StringFieldUpdateOperationsInput | string
+    nota?: IntFieldUpdateOperationsInput | number
+    dtAvaliacao?: DateTimeFieldUpdateOperationsInput | Date | string
     idAluno?: StringFieldUpdateOperationsInput | string
   }
 
@@ -6298,9 +7671,19 @@ export namespace Prisma {
     isNot?: EnderecoWhereInput | null
   }
 
+  export type AvaliacaoListRelationFilter = {
+    every?: AvaliacaoWhereInput
+    some?: AvaliacaoWhereInput
+    none?: AvaliacaoWhereInput
+  }
+
   export type SortOrderInput = {
     sort: SortOrder
     nulls?: NullsOrder
+  }
+
+  export type AvaliacaoOrderByRelationAggregateInput = {
+    _count?: SortOrder
   }
 
   export type AlunoCountOrderByAggregateInput = {
@@ -6481,6 +7864,38 @@ export namespace Prisma {
     _max?: NestedIntFilter<$PrismaModel>
   }
 
+  export type AvaliacaoCountOrderByAggregateInput = {
+    id?: SortOrder
+    disciplina?: SortOrder
+    nota?: SortOrder
+    dtAvaliacao?: SortOrder
+    idAluno?: SortOrder
+  }
+
+  export type AvaliacaoAvgOrderByAggregateInput = {
+    nota?: SortOrder
+  }
+
+  export type AvaliacaoMaxOrderByAggregateInput = {
+    id?: SortOrder
+    disciplina?: SortOrder
+    nota?: SortOrder
+    dtAvaliacao?: SortOrder
+    idAluno?: SortOrder
+  }
+
+  export type AvaliacaoMinOrderByAggregateInput = {
+    id?: SortOrder
+    disciplina?: SortOrder
+    nota?: SortOrder
+    dtAvaliacao?: SortOrder
+    idAluno?: SortOrder
+  }
+
+  export type AvaliacaoSumOrderByAggregateInput = {
+    nota?: SortOrder
+  }
+
   export type DecimalFilter<$PrismaModel = never> = {
     equals?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
     in?: Decimal[] | DecimalJsLike[] | number[] | string[] | ListDecimalFieldRefInput<$PrismaModel>
@@ -6595,10 +8010,24 @@ export namespace Prisma {
     connect?: EnderecoWhereUniqueInput
   }
 
+  export type AvaliacaoCreateNestedManyWithoutAlunoInput = {
+    create?: XOR<AvaliacaoCreateWithoutAlunoInput, AvaliacaoUncheckedCreateWithoutAlunoInput> | AvaliacaoCreateWithoutAlunoInput[] | AvaliacaoUncheckedCreateWithoutAlunoInput[]
+    connectOrCreate?: AvaliacaoCreateOrConnectWithoutAlunoInput | AvaliacaoCreateOrConnectWithoutAlunoInput[]
+    createMany?: AvaliacaoCreateManyAlunoInputEnvelope
+    connect?: AvaliacaoWhereUniqueInput | AvaliacaoWhereUniqueInput[]
+  }
+
   export type EnderecoUncheckedCreateNestedOneWithoutAlunoInput = {
     create?: XOR<EnderecoCreateWithoutAlunoInput, EnderecoUncheckedCreateWithoutAlunoInput>
     connectOrCreate?: EnderecoCreateOrConnectWithoutAlunoInput
     connect?: EnderecoWhereUniqueInput
+  }
+
+  export type AvaliacaoUncheckedCreateNestedManyWithoutAlunoInput = {
+    create?: XOR<AvaliacaoCreateWithoutAlunoInput, AvaliacaoUncheckedCreateWithoutAlunoInput> | AvaliacaoCreateWithoutAlunoInput[] | AvaliacaoUncheckedCreateWithoutAlunoInput[]
+    connectOrCreate?: AvaliacaoCreateOrConnectWithoutAlunoInput | AvaliacaoCreateOrConnectWithoutAlunoInput[]
+    createMany?: AvaliacaoCreateManyAlunoInputEnvelope
+    connect?: AvaliacaoWhereUniqueInput | AvaliacaoWhereUniqueInput[]
   }
 
   export type StringFieldUpdateOperationsInput = {
@@ -6635,6 +8064,20 @@ export namespace Prisma {
     update?: XOR<XOR<EnderecoUpdateToOneWithWhereWithoutAlunoInput, EnderecoUpdateWithoutAlunoInput>, EnderecoUncheckedUpdateWithoutAlunoInput>
   }
 
+  export type AvaliacaoUpdateManyWithoutAlunoNestedInput = {
+    create?: XOR<AvaliacaoCreateWithoutAlunoInput, AvaliacaoUncheckedCreateWithoutAlunoInput> | AvaliacaoCreateWithoutAlunoInput[] | AvaliacaoUncheckedCreateWithoutAlunoInput[]
+    connectOrCreate?: AvaliacaoCreateOrConnectWithoutAlunoInput | AvaliacaoCreateOrConnectWithoutAlunoInput[]
+    upsert?: AvaliacaoUpsertWithWhereUniqueWithoutAlunoInput | AvaliacaoUpsertWithWhereUniqueWithoutAlunoInput[]
+    createMany?: AvaliacaoCreateManyAlunoInputEnvelope
+    set?: AvaliacaoWhereUniqueInput | AvaliacaoWhereUniqueInput[]
+    disconnect?: AvaliacaoWhereUniqueInput | AvaliacaoWhereUniqueInput[]
+    delete?: AvaliacaoWhereUniqueInput | AvaliacaoWhereUniqueInput[]
+    connect?: AvaliacaoWhereUniqueInput | AvaliacaoWhereUniqueInput[]
+    update?: AvaliacaoUpdateWithWhereUniqueWithoutAlunoInput | AvaliacaoUpdateWithWhereUniqueWithoutAlunoInput[]
+    updateMany?: AvaliacaoUpdateManyWithWhereWithoutAlunoInput | AvaliacaoUpdateManyWithWhereWithoutAlunoInput[]
+    deleteMany?: AvaliacaoScalarWhereInput | AvaliacaoScalarWhereInput[]
+  }
+
   export type EnderecoUncheckedUpdateOneWithoutAlunoNestedInput = {
     create?: XOR<EnderecoCreateWithoutAlunoInput, EnderecoUncheckedCreateWithoutAlunoInput>
     connectOrCreate?: EnderecoCreateOrConnectWithoutAlunoInput
@@ -6643,6 +8086,20 @@ export namespace Prisma {
     delete?: EnderecoWhereInput | boolean
     connect?: EnderecoWhereUniqueInput
     update?: XOR<XOR<EnderecoUpdateToOneWithWhereWithoutAlunoInput, EnderecoUpdateWithoutAlunoInput>, EnderecoUncheckedUpdateWithoutAlunoInput>
+  }
+
+  export type AvaliacaoUncheckedUpdateManyWithoutAlunoNestedInput = {
+    create?: XOR<AvaliacaoCreateWithoutAlunoInput, AvaliacaoUncheckedCreateWithoutAlunoInput> | AvaliacaoCreateWithoutAlunoInput[] | AvaliacaoUncheckedCreateWithoutAlunoInput[]
+    connectOrCreate?: AvaliacaoCreateOrConnectWithoutAlunoInput | AvaliacaoCreateOrConnectWithoutAlunoInput[]
+    upsert?: AvaliacaoUpsertWithWhereUniqueWithoutAlunoInput | AvaliacaoUpsertWithWhereUniqueWithoutAlunoInput[]
+    createMany?: AvaliacaoCreateManyAlunoInputEnvelope
+    set?: AvaliacaoWhereUniqueInput | AvaliacaoWhereUniqueInput[]
+    disconnect?: AvaliacaoWhereUniqueInput | AvaliacaoWhereUniqueInput[]
+    delete?: AvaliacaoWhereUniqueInput | AvaliacaoWhereUniqueInput[]
+    connect?: AvaliacaoWhereUniqueInput | AvaliacaoWhereUniqueInput[]
+    update?: AvaliacaoUpdateWithWhereUniqueWithoutAlunoInput | AvaliacaoUpdateWithWhereUniqueWithoutAlunoInput[]
+    updateMany?: AvaliacaoUpdateManyWithWhereWithoutAlunoInput | AvaliacaoUpdateManyWithWhereWithoutAlunoInput[]
+    deleteMany?: AvaliacaoScalarWhereInput | AvaliacaoScalarWhereInput[]
   }
 
   export type AlunoCreateNestedOneWithoutEnderecoInput = {
@@ -6665,6 +8122,20 @@ export namespace Prisma {
     upsert?: AlunoUpsertWithoutEnderecoInput
     connect?: AlunoWhereUniqueInput
     update?: XOR<XOR<AlunoUpdateToOneWithWhereWithoutEnderecoInput, AlunoUpdateWithoutEnderecoInput>, AlunoUncheckedUpdateWithoutEnderecoInput>
+  }
+
+  export type AlunoCreateNestedOneWithoutAvaliacoesInput = {
+    create?: XOR<AlunoCreateWithoutAvaliacoesInput, AlunoUncheckedCreateWithoutAvaliacoesInput>
+    connectOrCreate?: AlunoCreateOrConnectWithoutAvaliacoesInput
+    connect?: AlunoWhereUniqueInput
+  }
+
+  export type AlunoUpdateOneRequiredWithoutAvaliacoesNestedInput = {
+    create?: XOR<AlunoCreateWithoutAvaliacoesInput, AlunoUncheckedCreateWithoutAvaliacoesInput>
+    connectOrCreate?: AlunoCreateOrConnectWithoutAvaliacoesInput
+    upsert?: AlunoUpsertWithoutAvaliacoesInput
+    connect?: AlunoWhereUniqueInput
+    update?: XOR<XOR<AlunoUpdateToOneWithWhereWithoutAvaliacoesInput, AlunoUpdateWithoutAvaliacoesInput>, AlunoUncheckedUpdateWithoutAvaliacoesInput>
   }
 
   export type DecimalFieldUpdateOperationsInput = {
@@ -6893,6 +8364,30 @@ export namespace Prisma {
     create: XOR<EnderecoCreateWithoutAlunoInput, EnderecoUncheckedCreateWithoutAlunoInput>
   }
 
+  export type AvaliacaoCreateWithoutAlunoInput = {
+    id?: string
+    disciplina: string
+    nota: number
+    dtAvaliacao?: Date | string
+  }
+
+  export type AvaliacaoUncheckedCreateWithoutAlunoInput = {
+    id?: string
+    disciplina: string
+    nota: number
+    dtAvaliacao?: Date | string
+  }
+
+  export type AvaliacaoCreateOrConnectWithoutAlunoInput = {
+    where: AvaliacaoWhereUniqueInput
+    create: XOR<AvaliacaoCreateWithoutAlunoInput, AvaliacaoUncheckedCreateWithoutAlunoInput>
+  }
+
+  export type AvaliacaoCreateManyAlunoInputEnvelope = {
+    data: AvaliacaoCreateManyAlunoInput | AvaliacaoCreateManyAlunoInput[]
+    skipDuplicates?: boolean
+  }
+
   export type EnderecoUpsertWithoutAlunoInput = {
     update: XOR<EnderecoUpdateWithoutAlunoInput, EnderecoUncheckedUpdateWithoutAlunoInput>
     create: XOR<EnderecoCreateWithoutAlunoInput, EnderecoUncheckedCreateWithoutAlunoInput>
@@ -6920,6 +8415,33 @@ export namespace Prisma {
     cidade?: StringFieldUpdateOperationsInput | string
   }
 
+  export type AvaliacaoUpsertWithWhereUniqueWithoutAlunoInput = {
+    where: AvaliacaoWhereUniqueInput
+    update: XOR<AvaliacaoUpdateWithoutAlunoInput, AvaliacaoUncheckedUpdateWithoutAlunoInput>
+    create: XOR<AvaliacaoCreateWithoutAlunoInput, AvaliacaoUncheckedCreateWithoutAlunoInput>
+  }
+
+  export type AvaliacaoUpdateWithWhereUniqueWithoutAlunoInput = {
+    where: AvaliacaoWhereUniqueInput
+    data: XOR<AvaliacaoUpdateWithoutAlunoInput, AvaliacaoUncheckedUpdateWithoutAlunoInput>
+  }
+
+  export type AvaliacaoUpdateManyWithWhereWithoutAlunoInput = {
+    where: AvaliacaoScalarWhereInput
+    data: XOR<AvaliacaoUpdateManyMutationInput, AvaliacaoUncheckedUpdateManyWithoutAlunoInput>
+  }
+
+  export type AvaliacaoScalarWhereInput = {
+    AND?: AvaliacaoScalarWhereInput | AvaliacaoScalarWhereInput[]
+    OR?: AvaliacaoScalarWhereInput[]
+    NOT?: AvaliacaoScalarWhereInput | AvaliacaoScalarWhereInput[]
+    id?: StringFilter<"Avaliacao"> | string
+    disciplina?: StringFilter<"Avaliacao"> | string
+    nota?: IntFilter<"Avaliacao"> | number
+    dtAvaliacao?: DateTimeFilter<"Avaliacao"> | Date | string
+    idAluno?: StringFilter<"Avaliacao"> | string
+  }
+
   export type AlunoCreateWithoutEnderecoInput = {
     id?: string
     nome: string
@@ -6929,6 +8451,7 @@ export namespace Prisma {
     rg?: number | null
     dataCriacao?: Date | string
     dataAtualizacao?: Date | string
+    avaliacoes?: AvaliacaoCreateNestedManyWithoutAlunoInput
   }
 
   export type AlunoUncheckedCreateWithoutEnderecoInput = {
@@ -6940,6 +8463,7 @@ export namespace Prisma {
     rg?: number | null
     dataCriacao?: Date | string
     dataAtualizacao?: Date | string
+    avaliacoes?: AvaliacaoUncheckedCreateNestedManyWithoutAlunoInput
   }
 
   export type AlunoCreateOrConnectWithoutEnderecoInput = {
@@ -6967,6 +8491,7 @@ export namespace Prisma {
     rg?: NullableIntFieldUpdateOperationsInput | number | null
     dataCriacao?: DateTimeFieldUpdateOperationsInput | Date | string
     dataAtualizacao?: DateTimeFieldUpdateOperationsInput | Date | string
+    avaliacoes?: AvaliacaoUpdateManyWithoutAlunoNestedInput
   }
 
   export type AlunoUncheckedUpdateWithoutEnderecoInput = {
@@ -6978,6 +8503,99 @@ export namespace Prisma {
     rg?: NullableIntFieldUpdateOperationsInput | number | null
     dataCriacao?: DateTimeFieldUpdateOperationsInput | Date | string
     dataAtualizacao?: DateTimeFieldUpdateOperationsInput | Date | string
+    avaliacoes?: AvaliacaoUncheckedUpdateManyWithoutAlunoNestedInput
+  }
+
+  export type AlunoCreateWithoutAvaliacoesInput = {
+    id?: string
+    nome: string
+    email: string
+    dataNascimento?: Date | string | null
+    formado?: boolean
+    rg?: number | null
+    dataCriacao?: Date | string
+    dataAtualizacao?: Date | string
+    endereco?: EnderecoCreateNestedOneWithoutAlunoInput
+  }
+
+  export type AlunoUncheckedCreateWithoutAvaliacoesInput = {
+    id?: string
+    nome: string
+    email: string
+    dataNascimento?: Date | string | null
+    formado?: boolean
+    rg?: number | null
+    dataCriacao?: Date | string
+    dataAtualizacao?: Date | string
+    endereco?: EnderecoUncheckedCreateNestedOneWithoutAlunoInput
+  }
+
+  export type AlunoCreateOrConnectWithoutAvaliacoesInput = {
+    where: AlunoWhereUniqueInput
+    create: XOR<AlunoCreateWithoutAvaliacoesInput, AlunoUncheckedCreateWithoutAvaliacoesInput>
+  }
+
+  export type AlunoUpsertWithoutAvaliacoesInput = {
+    update: XOR<AlunoUpdateWithoutAvaliacoesInput, AlunoUncheckedUpdateWithoutAvaliacoesInput>
+    create: XOR<AlunoCreateWithoutAvaliacoesInput, AlunoUncheckedCreateWithoutAvaliacoesInput>
+    where?: AlunoWhereInput
+  }
+
+  export type AlunoUpdateToOneWithWhereWithoutAvaliacoesInput = {
+    where?: AlunoWhereInput
+    data: XOR<AlunoUpdateWithoutAvaliacoesInput, AlunoUncheckedUpdateWithoutAvaliacoesInput>
+  }
+
+  export type AlunoUpdateWithoutAvaliacoesInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    nome?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    dataNascimento?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    formado?: BoolFieldUpdateOperationsInput | boolean
+    rg?: NullableIntFieldUpdateOperationsInput | number | null
+    dataCriacao?: DateTimeFieldUpdateOperationsInput | Date | string
+    dataAtualizacao?: DateTimeFieldUpdateOperationsInput | Date | string
+    endereco?: EnderecoUpdateOneWithoutAlunoNestedInput
+  }
+
+  export type AlunoUncheckedUpdateWithoutAvaliacoesInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    nome?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    dataNascimento?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    formado?: BoolFieldUpdateOperationsInput | boolean
+    rg?: NullableIntFieldUpdateOperationsInput | number | null
+    dataCriacao?: DateTimeFieldUpdateOperationsInput | Date | string
+    dataAtualizacao?: DateTimeFieldUpdateOperationsInput | Date | string
+    endereco?: EnderecoUncheckedUpdateOneWithoutAlunoNestedInput
+  }
+
+  export type AvaliacaoCreateManyAlunoInput = {
+    id?: string
+    disciplina: string
+    nota: number
+    dtAvaliacao?: Date | string
+  }
+
+  export type AvaliacaoUpdateWithoutAlunoInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    disciplina?: StringFieldUpdateOperationsInput | string
+    nota?: IntFieldUpdateOperationsInput | number
+    dtAvaliacao?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type AvaliacaoUncheckedUpdateWithoutAlunoInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    disciplina?: StringFieldUpdateOperationsInput | string
+    nota?: IntFieldUpdateOperationsInput | number
+    dtAvaliacao?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type AvaliacaoUncheckedUpdateManyWithoutAlunoInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    disciplina?: StringFieldUpdateOperationsInput | string
+    nota?: IntFieldUpdateOperationsInput | number
+    dtAvaliacao?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
 

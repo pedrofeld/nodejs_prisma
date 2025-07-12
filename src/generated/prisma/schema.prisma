@@ -26,13 +26,13 @@ model Aluno {
   dataCriacao     DateTime @default(now()) @map("data_criacao") // @default(now()) define o valor padrão como a data atual
   dataAtualizacao DateTime @updatedAt @map("data_atualizacao") // @updatedAt atualiza automaticamente
 
-  endereco Endereco?
+  endereco   Endereco?
+  avaliacoes Avaliacao[] // lista de avaliações (porque pode ser mais de 1), por isso o colchetes
 
   @@map("aluno") // 2x @ indica o nome da tabela no banco de dados
 }
 
 // Aluno possui 1 endereço, Endereço pertence a 1 Aluno
-
 model Endereco {
   id     String @id
   rua    String @db.VarChar(30)
@@ -40,8 +40,23 @@ model Endereco {
   numero Int
   cidade String @db.VarChar(50)
 
-  idAluno String @unique
+  idAluno String @unique // @unique garante que cada Aluno tenha apenas um Endereço, relação 1:1
   aluno   Aluno  @relation(fields: [idAluno], references: [id])
+}
+
+// Aluno pode ter N avaliações, Avaliação pertence a 1 Aluno
+
+model Avaliacao {
+  id         String @id @default(uuid())
+  disciplina String @db.VarChar(30)
+  nota       Int    @db.SmallInt
+
+  dtAvaliacao DateTime @default(now()) @map("data_avaliacao")
+
+  idAluno String @map("id_aluno")
+  aluno   Aluno  @relation(fields: [idAluno], references: [id]) // relação 1:N com Aluno
+
+  @@map("avaliacao")
 }
 
 model Curso {

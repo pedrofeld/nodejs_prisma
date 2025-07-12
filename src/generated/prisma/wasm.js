@@ -140,6 +140,14 @@ exports.Prisma.EnderecoScalarFieldEnum = {
   idAluno: 'idAluno'
 };
 
+exports.Prisma.AvaliacaoScalarFieldEnum = {
+  id: 'id',
+  disciplina: 'disciplina',
+  nota: 'nota',
+  dtAvaliacao: 'dtAvaliacao',
+  idAluno: 'idAluno'
+};
+
 exports.Prisma.CursoScalarFieldEnum = {
   id: 'id',
   titulo: 'titulo',
@@ -180,6 +188,7 @@ exports.Prisma.NullsOrder = {
 exports.Prisma.ModelName = {
   Aluno: 'Aluno',
   Endereco: 'Endereco',
+  Avaliacao: 'Avaliacao',
   Curso: 'Curso',
   Material: 'Material'
 };
