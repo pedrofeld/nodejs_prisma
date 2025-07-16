@@ -211,6 +211,7 @@ const config = {
     "db"
   ],
   "activeProvider": "postgresql",
+  "postinstall": false,
   "inlineDatasources": {
     "db": {
       "url": {
@@ -221,7 +222,7 @@ const config = {
   },
   "inlineSchema": "// This is your Prisma schema file,\n// learn more about it in the docs: https://pris.ly/d/prisma-schema\n\n// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?\n// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init\n\ngenerator client {\n  provider = \"prisma-client-js\"\n  output   = \"../src/generated/prisma\"\n}\n\ndatasource db {\n  provider = \"postgresql\"\n  url      = env(\"DATABASE_URL\")\n}\n\nmodel Aluno {\n  id             String    @id @default(uuid())\n  nome           String    @db.VarChar(120)\n  email          String    @unique @db.VarChar(60)\n  dataNascimento DateTime? @map(\"aniversario\") @db.Date // ? indica campo opcional, @ indica o nome no banco\n  formado        Boolean   @default(false)\n  rg             Int?\n\n  // função de auditoria, para histórico de criação e atualização\n  dataCriacao     DateTime @default(now()) @map(\"data_criacao\") // @default(now()) define o valor padrão como a data atual\n  dataAtualizacao DateTime @updatedAt @map(\"data_atualizacao\") // @updatedAt atualiza automaticamente\n\n  endereco   Endereco?\n  avaliacoes Avaliacao[] // lista de avaliações (porque pode ser mais de 1), por isso o colchetes\n  matriculas Matricula[] // lista de matrículas, relação N:N com Curso\n\n  @@map(\"aluno\") // 2x @ indica o nome da tabela no banco de dados\n}\n\n// Aluno possui 1 endereço, Endereço pertence a 1 Aluno\nmodel Endereco {\n  id     String @id\n  rua    String @db.VarChar(30)\n  bairro String @db.VarChar(30)\n  numero Int\n  cidade String @db.VarChar(50)\n\n  idAluno String @unique // @unique garante que cada Aluno tenha apenas um Endereço, relação 1:1\n  aluno   Aluno  @relation(fields: [idAluno], references: [id])\n}\n\n// Aluno pode ter N avaliações, Avaliação pertence a 1 Aluno\n\nmodel Avaliacao {\n  id         String @id @default(uuid())\n  disciplina String @db.VarChar(30)\n  nota       Int    @db.SmallInt\n\n  dtAvaliacao DateTime @default(now()) @map(\"data_avaliacao\")\n\n  idAluno String @map(\"id_aluno\")\n  aluno   Aluno  @relation(fields: [idAluno], references: [id]) // relação 1:N com Aluno\n\n  @@map(\"avaliacao\")\n}\n\nmodel Curso {\n  id           String  @id @default(uuid())\n  titulo       String\n  ementa       String\n  cargaHoraria Decimal\n  maxAlunos    Int     @default(30) @db.SmallInt\n  status       String\n\n  dataCriacao     DateTime @default(now()) @map(\"data_criacao\")\n  dataAtualizacao DateTime @updatedAt @map(\"data_atualizacao\")\n\n  matriculas Matricula[] // lista de matrículas, relação N:N com Aluno\n\n  @@map(\"curso\")\n}\n\n// Aluno pode se matricular em vários cursos, Curso pode ter vários alunos\nmodel Matricula {\n  idAluno String @map(\"id_aluno\")\n  idCurso String @map(\"id_curso\")\n\n  dtMatricula DateTime @default(now()) @map(\"data_matricula\")\n\n  aluno Aluno @relation(fields: [idAluno], references: [id])\n  curso Curso @relation(fields: [idCurso], references: [id])\n\n  @@id([idAluno, idCurso]) // chave primária composta\n  @@map(\"matricula\")\n}\n\nmodel Material {\n  id         Int     @id @default(autoincrement())\n  titulo     String\n  descricao  String\n  link       String\n  disponivel Boolean\n\n  dataCriacao     DateTime @default(now()) @map(\"data_criacao\")\n  dataAtualizacao DateTime @updatedAt @map(\"data_atualizacao\")\n\n  @@map(\"material\")\n}\n",
   "inlineSchemaHash": "e8d8ef259f8dafba06c628a2eb7ae19805115c0eee7f82b82f9e3cb5ff16f352",
-  "copyEngine": false
+  "copyEngine": true
 }
 
 const fs = require('fs')
@@ -258,3 +259,9 @@ const PrismaClient = getPrismaClient(config)
 exports.PrismaClient = PrismaClient
 Object.assign(exports, Prisma)
 
+// file annotations for bundling tools to include these files
+path.join(__dirname, "query_engine-windows.dll.node");
+path.join(process.cwd(), "src/generated/prisma/query_engine-windows.dll.node")
+// file annotations for bundling tools to include these files
+path.join(__dirname, "schema.prisma");
+path.join(process.cwd(), "src/generated/prisma/schema.prisma")
