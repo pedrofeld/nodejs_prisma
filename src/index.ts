@@ -1,9 +1,9 @@
-import { PrismaClient } from "./generated/prisma";
+import { AlunoRepository } from "./database/aluno.repository";
 
-const db = new PrismaClient();
+const alunoRepository = new AlunoRepository();
 
 async function main() {
-    const alunos = await db.aluno.findMany();
+    const alunos = await alunoRepository.list();
     console.log(alunos);
 }
 
