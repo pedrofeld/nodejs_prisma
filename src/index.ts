@@ -11,6 +11,7 @@ async function main() {
     // const aluno = await alunoRepository.obterPorId("2");
     // console.log(aluno);
 
+    //criar novo aluno
     const alunoCriado = await alunoRepository.criar({
         nome: "joaozinho",
         email: "joaozinho@gmail.com",
