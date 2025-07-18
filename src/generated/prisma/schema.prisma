@@ -55,7 +55,7 @@ model Avaliacao {
   dtAvaliacao DateTime @default(now()) @map("data_avaliacao")
 
   idAluno String @map("id_aluno")
-  aluno   Aluno  @relation(fields: [idAluno], references: [id]) // relação 1:N com Aluno
+  aluno   Aluno  @relation(fields: [idAluno], references: [id], onDelete: Cascade) // relação 1:N com Aluno
 
   @@map("avaliacao")
 }
@@ -83,8 +83,8 @@ model Matricula {
 
   dtMatricula DateTime @default(now()) @map("data_matricula")
 
-  aluno Aluno @relation(fields: [idAluno], references: [id])
-  curso Curso @relation(fields: [idCurso], references: [id])
+  aluno Aluno @relation(fields: [idAluno], references: [id], onDelete: Cascade)
+  curso Curso @relation(fields: [idCurso], references: [id], onDelete: Cascade)
 
   @@id([idAluno, idCurso]) // chave primária composta
   @@map("matricula")
