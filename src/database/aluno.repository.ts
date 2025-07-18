@@ -78,4 +78,50 @@ export class AlunoRepository {
             return handleError(error);
         }
     }
+
+    // Queries
+    public async pesquisaEspecifica() {
+        try {
+            const alunos = await prisma.aluno.findMany({
+                where: {
+                    nome: {
+                        contains: "pedro",
+                        mode: "insensitive" // torna irrelevante a diferença entre letra maiúsculas e minúsculas
+                    },
+                    // rg: 123456789
+                },
+                // take: 5, // limita a quantidade de alunos que o sistema deve retornar
+                /*
+                    select: { // informa os campos que o sistema deve retornar
+                        id: true,
+                        nome: true
+                    }
+                */
+
+                // Faz o sistema trazer todos os usuários de um tipo OU do outro
+                /*
+                    where: {
+                        OR:
+                        [
+                            {
+                                nome: {
+                                    constains: "pedro",
+                                    mode: "insensitive",
+                                    rg: null
+                                }
+                            },
+                            {
+                                email: {
+                                    endsWith: "@gmail.com"
+                                }
+                            }
+                        ]
+                    }
+                */
+            })
+            return alunos;
+        } catch (error: any) {
+            return handleError(error);
+        }
+    }
 }

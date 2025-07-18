@@ -9,7 +9,12 @@ async function main() {
         const alunos = await alunoRepository.list();
         console.log(alunos);
     */
-    
+
+    // listar alunos específicos
+    /*
+        const alunos = await alunoRepository.pesquisaEspecifica()
+        console.log(alunos)
+    */
 
     // listar aluno por ID
     /*
@@ -42,56 +47,58 @@ async function main() {
 
     // excluir aluno
     /*
-        const alunoExcluido = await alunoRepository.excluir("1");
+        const alunoExcluido = await alunoRepository.excluir("d14c7bba-ca65-48d4-8df0-90cf24110f05");
         console.log(alunoExcluido);
     */
 
    // Exemplo de aluno com vínculos
-    const curso = await prisma.curso.create({
-        data: {
-            titulo: "Curso de TypeScript",
-            ementa: "Conceitos modernos de TS",
-            cargaHoraria: 60,
-            status: "ativo"
-        }
-    });
-
-    const alunoCriado = await alunoRepository.criar({
-        nome: "Pedro Grow",
-        email: "p@growdev.com.br",
-        formado: true,
-        rg: 123456789
-    });
-
-    if (!alunoCriado) {
-        console.error("Erro ao criar aluno");
-        return;
-    }
-
-    await prisma.avaliacao.createMany({
-        data: [
-            {
-            disciplina: "Lógica de Programação",
-            nota: 10,
-            idAluno: alunoCriado.id
-            },
-            {
-            disciplina: "Banco de Dados",
-            nota: 9,
-            idAluno: alunoCriado.id
+   /*
+        const curso = await prisma.curso.create({
+            data: {
+                titulo: "Curso de TypeScript",
+                ementa: "Conceitos modernos de TS",
+                cargaHoraria: 60,
+                status: "ativo"
             }
-        ]
-    });
+        });
 
-    await prisma.matricula.create({
-        data: {
-            idAluno: alunoCriado.id,
-            idCurso: curso.id
+        const alunoCriado = await alunoRepository.criar({
+            nome: "Pedro Grow",
+            email: "pedro@growdev.com.br",
+            formado: true,
+            rg: 123456789
+        });
+
+        if (!alunoCriado) {
+            console.error("Erro ao criar aluno");
+            return;
         }
-    });
 
-    const resultado = await alunoRepository.obterPorId(alunoCriado.id);
-    console.dir(resultado, { depth: null });
+        await prisma.avaliacao.createMany({
+            data: [
+                {
+                disciplina: "Lógica de Programação",
+                nota: 10,
+                idAluno: alunoCriado.id
+                },
+                {
+                disciplina: "Banco de Dados",
+                nota: 9,
+                idAluno: alunoCriado.id
+                }
+            ]
+        });
+
+        await prisma.matricula.create({
+            data: {
+                idAluno: alunoCriado.id,
+                idCurso: curso.id
+            }
+        });
+
+        const resultado = await alunoRepository.obterPorId(alunoCriado.id);
+        console.dir(resultado, { depth: null });
+    */
 }
 
 main();
