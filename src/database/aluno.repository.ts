@@ -54,7 +54,20 @@ export class AlunoRepository {
             return aluno;
         } catch (error: any) {
             return handleError(error);
-            
+        }
+    }
+
+    // Excluir aluno
+    public async excluir(id: string) {
+        try {
+            const alunoExcluido = await prisma.aluno.delete({
+                where: {
+                    id
+                }
+            });
+            return alunoExcluido;
+        } catch (error: any) {
+            return handleError(error);
         }
     }
 }

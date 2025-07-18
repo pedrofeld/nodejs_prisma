@@ -8,6 +8,7 @@ async function main() {
         const alunos = await alunoRepository.list();
         console.log(alunos);
     */
+    
 
     // listar aluno por ID
     /*
@@ -35,6 +36,13 @@ async function main() {
             }
         );
         console.log(alunoAtualizado);
+    */
+    
+
+    // excluir aluno
+    /*
+        const alunoExcluido = await alunoRepository.excluir("1");
+        console.log(alunoExcluido);
     */
 }
 
