@@ -61,11 +61,11 @@ model Avaliacao {
 }
 
 model Curso {
-  id           String  @id @default(uuid())
+  id           String @id @default(uuid())
   titulo       String
   ementa       String
-  cargaHoraria Decimal
-  maxAlunos    Int     @default(30) @db.SmallInt
+  cargaHoraria Int
+  maxAlunos    Int    @default(30) @db.SmallInt
   status       String
 
   dataCriacao     DateTime @default(now()) @map("data_criacao")

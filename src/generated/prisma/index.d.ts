@@ -4798,12 +4798,12 @@ export namespace Prisma {
   }
 
   export type CursoAvgAggregateOutputType = {
-    cargaHoraria: Decimal | null
+    cargaHoraria: number | null
     maxAlunos: number | null
   }
 
   export type CursoSumAggregateOutputType = {
-    cargaHoraria: Decimal | null
+    cargaHoraria: number | null
     maxAlunos: number | null
   }
 
@@ -4811,7 +4811,7 @@ export namespace Prisma {
     id: string | null
     titulo: string | null
     ementa: string | null
-    cargaHoraria: Decimal | null
+    cargaHoraria: number | null
     maxAlunos: number | null
     status: string | null
     dataCriacao: Date | null
@@ -4822,7 +4822,7 @@ export namespace Prisma {
     id: string | null
     titulo: string | null
     ementa: string | null
-    cargaHoraria: Decimal | null
+    cargaHoraria: number | null
     maxAlunos: number | null
     status: string | null
     dataCriacao: Date | null
@@ -4976,7 +4976,7 @@ export namespace Prisma {
     id: string
     titulo: string
     ementa: string
-    cargaHoraria: Decimal
+    cargaHoraria: number
     maxAlunos: number
     status: string
     dataCriacao: Date
@@ -5065,7 +5065,7 @@ export namespace Prisma {
       id: string
       titulo: string
       ementa: string
-      cargaHoraria: Prisma.Decimal
+      cargaHoraria: number
       maxAlunos: number
       status: string
       dataCriacao: Date
@@ -5497,7 +5497,7 @@ export namespace Prisma {
     readonly id: FieldRef<"Curso", 'String'>
     readonly titulo: FieldRef<"Curso", 'String'>
     readonly ementa: FieldRef<"Curso", 'String'>
-    readonly cargaHoraria: FieldRef<"Curso", 'Decimal'>
+    readonly cargaHoraria: FieldRef<"Curso", 'Int'>
     readonly maxAlunos: FieldRef<"Curso", 'Int'>
     readonly status: FieldRef<"Curso", 'String'>
     readonly dataCriacao: FieldRef<"Curso", 'DateTime'>
@@ -8193,20 +8193,6 @@ export namespace Prisma {
 
 
   /**
-   * Reference to a field of type 'Decimal'
-   */
-  export type DecimalFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Decimal'>
-    
-
-
-  /**
-   * Reference to a field of type 'Decimal[]'
-   */
-  export type ListDecimalFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Decimal[]'>
-    
-
-
-  /**
    * Reference to a field of type 'Float'
    */
   export type FloatFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Float'>
@@ -8427,7 +8413,7 @@ export namespace Prisma {
     id?: StringFilter<"Curso"> | string
     titulo?: StringFilter<"Curso"> | string
     ementa?: StringFilter<"Curso"> | string
-    cargaHoraria?: DecimalFilter<"Curso"> | Decimal | DecimalJsLike | number | string
+    cargaHoraria?: IntFilter<"Curso"> | number
     maxAlunos?: IntFilter<"Curso"> | number
     status?: StringFilter<"Curso"> | string
     dataCriacao?: DateTimeFilter<"Curso"> | Date | string
@@ -8454,7 +8440,7 @@ export namespace Prisma {
     NOT?: CursoWhereInput | CursoWhereInput[]
     titulo?: StringFilter<"Curso"> | string
     ementa?: StringFilter<"Curso"> | string
-    cargaHoraria?: DecimalFilter<"Curso"> | Decimal | DecimalJsLike | number | string
+    cargaHoraria?: IntFilter<"Curso"> | number
     maxAlunos?: IntFilter<"Curso"> | number
     status?: StringFilter<"Curso"> | string
     dataCriacao?: DateTimeFilter<"Curso"> | Date | string
@@ -8485,7 +8471,7 @@ export namespace Prisma {
     id?: StringWithAggregatesFilter<"Curso"> | string
     titulo?: StringWithAggregatesFilter<"Curso"> | string
     ementa?: StringWithAggregatesFilter<"Curso"> | string
-    cargaHoraria?: DecimalWithAggregatesFilter<"Curso"> | Decimal | DecimalJsLike | number | string
+    cargaHoraria?: IntWithAggregatesFilter<"Curso"> | number
     maxAlunos?: IntWithAggregatesFilter<"Curso"> | number
     status?: StringWithAggregatesFilter<"Curso"> | string
     dataCriacao?: DateTimeWithAggregatesFilter<"Curso"> | Date | string
@@ -8815,7 +8801,7 @@ export namespace Prisma {
     id?: string
     titulo: string
     ementa: string
-    cargaHoraria: Decimal | DecimalJsLike | number | string
+    cargaHoraria: number
     maxAlunos?: number
     status: string
     dataCriacao?: Date | string
@@ -8827,7 +8813,7 @@ export namespace Prisma {
     id?: string
     titulo: string
     ementa: string
-    cargaHoraria: Decimal | DecimalJsLike | number | string
+    cargaHoraria: number
     maxAlunos?: number
     status: string
     dataCriacao?: Date | string
@@ -8839,7 +8825,7 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     titulo?: StringFieldUpdateOperationsInput | string
     ementa?: StringFieldUpdateOperationsInput | string
-    cargaHoraria?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    cargaHoraria?: IntFieldUpdateOperationsInput | number
     maxAlunos?: IntFieldUpdateOperationsInput | number
     status?: StringFieldUpdateOperationsInput | string
     dataCriacao?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -8851,7 +8837,7 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     titulo?: StringFieldUpdateOperationsInput | string
     ementa?: StringFieldUpdateOperationsInput | string
-    cargaHoraria?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    cargaHoraria?: IntFieldUpdateOperationsInput | number
     maxAlunos?: IntFieldUpdateOperationsInput | number
     status?: StringFieldUpdateOperationsInput | string
     dataCriacao?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -8863,7 +8849,7 @@ export namespace Prisma {
     id?: string
     titulo: string
     ementa: string
-    cargaHoraria: Decimal | DecimalJsLike | number | string
+    cargaHoraria: number
     maxAlunos?: number
     status: string
     dataCriacao?: Date | string
@@ -8874,7 +8860,7 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     titulo?: StringFieldUpdateOperationsInput | string
     ementa?: StringFieldUpdateOperationsInput | string
-    cargaHoraria?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    cargaHoraria?: IntFieldUpdateOperationsInput | number
     maxAlunos?: IntFieldUpdateOperationsInput | number
     status?: StringFieldUpdateOperationsInput | string
     dataCriacao?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -8885,7 +8871,7 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     titulo?: StringFieldUpdateOperationsInput | string
     ementa?: StringFieldUpdateOperationsInput | string
-    cargaHoraria?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    cargaHoraria?: IntFieldUpdateOperationsInput | number
     maxAlunos?: IntFieldUpdateOperationsInput | number
     status?: StringFieldUpdateOperationsInput | string
     dataCriacao?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -9292,17 +9278,6 @@ export namespace Prisma {
     nota?: SortOrder
   }
 
-  export type DecimalFilter<$PrismaModel = never> = {
-    equals?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
-    in?: Decimal[] | DecimalJsLike[] | number[] | string[] | ListDecimalFieldRefInput<$PrismaModel>
-    notIn?: Decimal[] | DecimalJsLike[] | number[] | string[] | ListDecimalFieldRefInput<$PrismaModel>
-    lt?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
-    lte?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
-    gt?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
-    gte?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
-    not?: NestedDecimalFilter<$PrismaModel> | Decimal | DecimalJsLike | number | string
-  }
-
   export type CursoCountOrderByAggregateInput = {
     id?: SortOrder
     titulo?: SortOrder
@@ -9344,22 +9319,6 @@ export namespace Prisma {
   export type CursoSumOrderByAggregateInput = {
     cargaHoraria?: SortOrder
     maxAlunos?: SortOrder
-  }
-
-  export type DecimalWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
-    in?: Decimal[] | DecimalJsLike[] | number[] | string[] | ListDecimalFieldRefInput<$PrismaModel>
-    notIn?: Decimal[] | DecimalJsLike[] | number[] | string[] | ListDecimalFieldRefInput<$PrismaModel>
-    lt?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
-    lte?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
-    gt?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
-    gte?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
-    not?: NestedDecimalWithAggregatesFilter<$PrismaModel> | Decimal | DecimalJsLike | number | string
-    _count?: NestedIntFilter<$PrismaModel>
-    _avg?: NestedDecimalFilter<$PrismaModel>
-    _sum?: NestedDecimalFilter<$PrismaModel>
-    _min?: NestedDecimalFilter<$PrismaModel>
-    _max?: NestedDecimalFilter<$PrismaModel>
   }
 
   export type CursoScalarRelationFilter = {
@@ -9618,14 +9577,6 @@ export namespace Prisma {
     connect?: MatriculaWhereUniqueInput | MatriculaWhereUniqueInput[]
   }
 
-  export type DecimalFieldUpdateOperationsInput = {
-    set?: Decimal | DecimalJsLike | number | string
-    increment?: Decimal | DecimalJsLike | number | string
-    decrement?: Decimal | DecimalJsLike | number | string
-    multiply?: Decimal | DecimalJsLike | number | string
-    divide?: Decimal | DecimalJsLike | number | string
-  }
-
   export type MatriculaUpdateManyWithoutCursoNestedInput = {
     create?: XOR<MatriculaCreateWithoutCursoInput, MatriculaUncheckedCreateWithoutCursoInput> | MatriculaCreateWithoutCursoInput[] | MatriculaUncheckedCreateWithoutCursoInput[]
     connectOrCreate?: MatriculaCreateOrConnectWithoutCursoInput | MatriculaCreateOrConnectWithoutCursoInput[]
@@ -9850,33 +9801,6 @@ export namespace Prisma {
     gt?: number | FloatFieldRefInput<$PrismaModel>
     gte?: number | FloatFieldRefInput<$PrismaModel>
     not?: NestedFloatFilter<$PrismaModel> | number
-  }
-
-  export type NestedDecimalFilter<$PrismaModel = never> = {
-    equals?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
-    in?: Decimal[] | DecimalJsLike[] | number[] | string[] | ListDecimalFieldRefInput<$PrismaModel>
-    notIn?: Decimal[] | DecimalJsLike[] | number[] | string[] | ListDecimalFieldRefInput<$PrismaModel>
-    lt?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
-    lte?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
-    gt?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
-    gte?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
-    not?: NestedDecimalFilter<$PrismaModel> | Decimal | DecimalJsLike | number | string
-  }
-
-  export type NestedDecimalWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
-    in?: Decimal[] | DecimalJsLike[] | number[] | string[] | ListDecimalFieldRefInput<$PrismaModel>
-    notIn?: Decimal[] | DecimalJsLike[] | number[] | string[] | ListDecimalFieldRefInput<$PrismaModel>
-    lt?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
-    lte?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
-    gt?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
-    gte?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
-    not?: NestedDecimalWithAggregatesFilter<$PrismaModel> | Decimal | DecimalJsLike | number | string
-    _count?: NestedIntFilter<$PrismaModel>
-    _avg?: NestedDecimalFilter<$PrismaModel>
-    _sum?: NestedDecimalFilter<$PrismaModel>
-    _min?: NestedDecimalFilter<$PrismaModel>
-    _max?: NestedDecimalFilter<$PrismaModel>
   }
 
   export type EnderecoCreateWithoutAlunoInput = {
@@ -10230,7 +10154,7 @@ export namespace Prisma {
     id?: string
     titulo: string
     ementa: string
-    cargaHoraria: Decimal | DecimalJsLike | number | string
+    cargaHoraria: number
     maxAlunos?: number
     status: string
     dataCriacao?: Date | string
@@ -10241,7 +10165,7 @@ export namespace Prisma {
     id?: string
     titulo: string
     ementa: string
-    cargaHoraria: Decimal | DecimalJsLike | number | string
+    cargaHoraria: number
     maxAlunos?: number
     status: string
     dataCriacao?: Date | string
@@ -10305,7 +10229,7 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     titulo?: StringFieldUpdateOperationsInput | string
     ementa?: StringFieldUpdateOperationsInput | string
-    cargaHoraria?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    cargaHoraria?: IntFieldUpdateOperationsInput | number
     maxAlunos?: IntFieldUpdateOperationsInput | number
     status?: StringFieldUpdateOperationsInput | string
     dataCriacao?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -10316,7 +10240,7 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     titulo?: StringFieldUpdateOperationsInput | string
     ementa?: StringFieldUpdateOperationsInput | string
-    cargaHoraria?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    cargaHoraria?: IntFieldUpdateOperationsInput | number
     maxAlunos?: IntFieldUpdateOperationsInput | number
     status?: StringFieldUpdateOperationsInput | string
     dataCriacao?: DateTimeFieldUpdateOperationsInput | Date | string

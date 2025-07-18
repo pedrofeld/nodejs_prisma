@@ -64,7 +64,7 @@ model Curso {
   id String @id @default(uuid())
   titulo String
   ementa String
-  cargaHoraria Decimal
+  cargaHoraria Int
   maxAlunos Int @default(30) @db.SmallInt
   status String
 

@@ -20,6 +20,14 @@ export class AlunoRepository {
             const aluno = await prisma.aluno.findUnique({
                 where: {
                     id
+                },
+                include: {
+                    avaliacoes: true,
+                    matriculas: {
+                        include: {
+                            curso: true
+                        }
+                    }
                 }
             })
             return aluno;
