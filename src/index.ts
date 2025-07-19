@@ -1,12 +1,16 @@
 import { AlunoRepository } from "./database/aluno.repository";
 import { prisma } from "./config/prisma.config";
+import { AvaliacaoRepository } from "./database/avaliacao.repository";
 
 const alunoRepository = new AlunoRepository();
+const avaliacaoRepository = new AvaliacaoRepository();
 
 async function main() {
     // listar alunos
-    const alunos = await alunoRepository.list();
-    console.log(alunos);
+    /*
+        const alunos = await alunoRepository.list();
+        console.log(alunos);
+    */
     
 
     // listar alunos específicos
@@ -98,6 +102,15 @@ async function main() {
         const resultado = await alunoRepository.obterPorId(alunoCriado.id);
         console.dir(resultado, { depth: null });
     */
+
+    // criar nova avaliação
+    const novaAvaliacao = await avaliacaoRepository.criar({
+        disciplina: "React",
+        nota: 10,
+        idAluno: "af1cf703-0500-4a92-8b1f-0bd1c7f608a9"
+    })
+    
+    console.log(novaAvaliacao)
 }
 
 main();
