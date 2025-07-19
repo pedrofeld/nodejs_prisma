@@ -5,10 +5,9 @@ const alunoRepository = new AlunoRepository();
 
 async function main() {
     // listar alunos
-    /*
-        const alunos = await alunoRepository.list();
-        console.log(alunos);
-    */
+    const alunos = await alunoRepository.list();
+    console.log(alunos);
+    
 
     // listar alunos específicos
     /*

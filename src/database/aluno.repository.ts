@@ -7,8 +7,30 @@ export class AlunoRepository {
     // Método para listar todos os alunos
     public async list() {
         try {
-            const alunos = await prisma.aluno.findMany();
-        return alunos;
+            const alunos = await prisma.aluno.findMany({
+                where: {
+                    // dataNascimento: {
+                    //     gte: new Date("1995-01-29")
+                    // }
+                },
+                select: {
+                    id: true,
+                    email: true,
+                    nome: true,
+                    dataNascimento: true
+                },
+                orderBy: [ // {dataNascimento: "desc"}
+                    // se houver "empate" no critério de ordenação:
+                    {
+                        nome: "asc"
+                    },
+                    {
+                        id: "asc"
+                    }
+                ],
+                //_count: true
+            });
+            return alunos;
         } catch (error) {
             return handleError(error);
         }
