@@ -11,7 +11,6 @@ async function main() {
         const alunos = await alunoRepository.list();
         console.log(alunos);
     */
-    
 
     // listar alunos específicos
     /*
@@ -115,8 +114,23 @@ async function main() {
     */
 
     // listar todas as avaliações
-    const avaliacoes = await avaliacaoRepository.listar();
-    console.log(avaliacoes);
+    /*
+        const avaliacoes = await avaliacaoRepository.listar();
+        console.log(avaliacoes);
+    */
+
+    // criar aluno e avaliação simultaneamente
+    /*
+        await avaliacaoRepository.criarAlunoEAvaliacao({
+            email: "estudante@gmail.com",
+            nome: "Aleatório",
+            rg: 12345,
+            avaliacao: {
+                disciplina: "Manipulação de DOM",
+                nota: 9
+            }
+        })
+    */
 }
 
 main();

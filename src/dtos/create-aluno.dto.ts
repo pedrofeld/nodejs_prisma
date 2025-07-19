@@ -2,6 +2,6 @@ export interface CreateAlunoDto {
     nome: string;
     email: string;
     dataNascimento?: Date;
-    formado: boolean;
+    formado?: boolean;
     rg?: number;
 }

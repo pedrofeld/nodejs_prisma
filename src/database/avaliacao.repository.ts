@@ -1,5 +1,6 @@
 import { handleError } from "../config/error.handler";
 import { prisma}  from "../config/prisma.config";
+import { CreateAlunoEAvaliacaoDto } from "../dtos/create-aluno-avaliacao.dto";
 import { CreateAvaliacaoDto } from "../dtos/create-avaliacao.dto"; 
 import { AlunoRepository } from "./aluno.repository";
 
@@ -44,6 +45,34 @@ export class AvaliacaoRepository {
                 }
             });
             return avaliacoes;
+        } catch (error: any) {
+            return handleError(error);
+        }
+    }
+
+    public async criarAlunoEAvaliacao(dados: CreateAlunoEAvaliacaoDto){
+        try {
+            await prisma.$transaction(async (tx) => {
+                const aluno = await tx.aluno.create({
+                    data: {
+                        email: dados.email,
+                        nome: dados.nome,
+                        rg: dados.rg,
+                        dataNascimento: dados.dataNascimento
+                    }
+                });
+
+                console.log("Aluno criado com sucesso")
+
+                await tx.avaliacao.create({
+                    data: {
+                        ...dados.avaliacao,
+                        idAluno: aluno.id
+                    }
+                });
+
+                console.log("Avaliação criada com sucesso")
+            })
         } catch (error: any) {
             return handleError(error);
         }
