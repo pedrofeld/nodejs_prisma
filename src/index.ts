@@ -104,13 +104,19 @@ async function main() {
     */
 
     // criar nova avaliação
-    const novaAvaliacao = await avaliacaoRepository.criar({
-        disciplina: "React",
-        nota: 10,
-        idAluno: "af1cf703-0500-4a92-8b1f-0bd1c7f608a9"
-    })
-    
-    console.log(novaAvaliacao)
+    /*
+        const novaAvaliacao = await avaliacaoRepository.criar({
+            disciplina: "React",
+            nota: 10,
+            idAluno: "af1cf703-0500-4a92-8b1f-0bd1c7f608a9"
+        })
+        
+        console.log(novaAvaliacao)
+    */
+
+    // listar todas as avaliações
+    const avaliacoes = await avaliacaoRepository.listar();
+    console.log(avaliacoes);
 }
 
 main();

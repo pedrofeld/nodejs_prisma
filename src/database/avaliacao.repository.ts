@@ -22,4 +22,30 @@ export class AvaliacaoRepository {
             return handleError(error);
         }
     }
+
+    public async listar(){
+        try {
+            const avaliacoes = await prisma.avaliacao.findMany({
+                // traz todas as inforamções do aluno junto na consulta de avaliações
+                /*
+                    include: {
+                        aluno: true
+                    }
+                */
+
+                // traz somente o nome e o email do aluno na consulta de avaliações
+                include: {
+                    aluno: {
+                        select: {
+                            nome: true,
+                            email: true
+                        }
+                    }
+                }
+            });
+            return avaliacoes;
+        } catch (error: any) {
+            return handleError(error);
+        }
+    }
 }
